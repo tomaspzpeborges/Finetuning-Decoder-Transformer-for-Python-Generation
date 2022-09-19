@@ -1,0 +1,1000 @@
+{"intent": "define the function strip_tags with an argument value.", "snippet": "def strip_tags ( value ) :"}
+{"intent": "while '<' is contained in value and '>' is contained in value,", "snippet": "while '<' in value and '>' in value :"}
+{"intent": "call the function _strip_once with an argument value, substitute the result for new_value.", "snippet": "new_value = _strip_once ( value )"}
+{"intent": "if new_value equals value,", "snippet": "if new_value == value :"}
+{"intent": "break from the loop execution.", "snippet": "break"}
+{"intent": "substitute new_value for value.", "snippet": "value = new_value"}
+{"intent": "return value.", "snippet": "return value"}
+{"intent": "call the function allow_lazy with an argument strip_tags, substitute the result for strip_tags.", "snippet": "strip_tags = allow_lazy ( strip_tags )"}
+{"intent": "define the function remove_tags with 2 arguments: html and tags.", "snippet": "def remove_tags ( html , tags ) :"}
+{"intent": "tags is a list containing results of the function re.escape with an argument tag, for every tag in tags split into words.", "snippet": "tags = [ re . escape ( tag ) for tag in tags . split ( ) ]"}
+{"intent": "join elements of tags into a string, separated with '|', format string '(%s)' with it, substitute the result for tags_re.", "snippet": "tags_re = '(%s)' % '|' . join ( tags )"}
+{"intent": "call the function re.compile with 2 arguments: raw string '<%s(/?>|(\\s+[^>]*>))' formated with tags_re and re.U,", "snippet": "starttag_re = re . compile ( r'<%s(/?>|(\\s+[^>]*>))' % tags_re , re . U )"}
+{"intent": "substitute the result for starttag_re.   call the function re.compile with an argument string '</%s>' formated with tags_re, substitute the result for endtag_re.", "snippet": "endtag_re = re . compile ( '</%s>' % tags_re )"}
+{"intent": "call the function starttag_re.sub with 2 arguments: an empty string and html, substitute the result for html.", "snippet": "html = starttag_re . sub ( '' , html )"}
+{"intent": "call the function endtag_re.sub with 2 arguments: an empty string and html, substitute the result for html.", "snippet": "html = endtag_re . sub ( '' , html )"}
+{"intent": "return html.", "snippet": "return html"}
+{"intent": "call the function allow_lazy with 2 arguments: remove_tags, six.text_type, substitute the result for remove_tags.", "snippet": "remove_tags = allow_lazy ( remove_tags , six . text_type )"}
+{"intent": "define the function strip_spaces_between_tags with an argument value.", "snippet": "def strip_spaces_between_tags ( value ) :"}
+{"intent": "call the method re.sub with 3 arguments: raw string '>\\s+<', string '><' and result of the function force_text,", "snippet": "return re . sub ( r'>\\s+<' , '><' , force_text ( value ) )"}
+{"intent": "called with an argument value, return the result.   call the function allow_lazy with 2 arguments: strip_spaces_between_tags, six.text_type, substitute the result for strip_spaces_between_tags.", "snippet": "strip_spaces_between_tags = allow_lazy ( strip_spaces_between_tags , six . text_type )"}
+{"intent": "define the function strip_entities with an argument value.", "snippet": "def strip_entities ( value ) :"}
+{"intent": "call the method re.sub with 3 arguments: raw string '&(?:\\w+|#\\d+);', empty string and result of the function force_text,", "snippet": "return re . sub ( r'&(?:\\w+|#\\d+);' , '' , force_text ( value ) )"}
+{"intent": "called with an argument value, return the result.   call the function allow_lazy with 2 arguments: strip_entities, six.text_type, substitute the result for strip_entities.", "snippet": "strip_entities = allow_lazy ( strip_entities , six . text_type )"}
+{"intent": "define the function smart_urlquote with an argument url.", "snippet": "def smart_urlquote ( url ) :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "call the function urlsplit with an argument url, assign the result to scheme, netloc, path, query and fragment, respectively.", "snippet": "scheme , netloc , path , query , fragment = urlsplit ( url )"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "call the method netloc.encode with an argument string 'idna', call the method decode on the result with an argument 'ascii',", "snippet": "netloc = netloc . encode ( 'idna' ) . decode ( 'ascii' )"}
+{"intent": "substitute the result for netloc.   if UnicodeError exception is caught,", "snippet": "except UnicodeError :"}
+{"intent": "do nothing.", "snippet": "pass"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "call the function urlunsplit with an argument tuple with 4 elements: scheme, netloc, path, query and fragment, substitute the result for url.", "snippet": "url = urlunsplit ( ( scheme , netloc , path , query , fragment ) )"}
+{"intent": "if ValueError exception is caught,", "snippet": "except ValueError :"}
+{"intent": "do nothing.", "snippet": "pass"}
+{"intent": "call the function force_str with an argument url, use the result as an argument for the call to the function unquote, substitute the result for url.", "snippet": "url = unquote ( force_str ( url ) )"}
+{"intent": "call the function quote with 2 arguments: url and safe as bytes string '!*\\'();:@&=+$,/?#[]~', substitute the result for url.", "snippet": "url = quote ( url , safe = b'!*\\'();:@&=+$,/?#[]~' )"}
+{"intent": "call the function force_text with an argument url, return the result.", "snippet": "return force_text ( url )"}
+{"intent": "define the function urlize with 4 arguments: text, trim_url_limit set to None, nofollow set to boolean False,", "snippet": "def urlize ( text , trim_url_limit = None , nofollow = False , autoescape = False ) :"}
+{"intent": "define the function trim_url with 2 arguments: x and limit set to trim_url_limit.", "snippet": "def trim_url ( x , limit = trim_url_limit ) :"}
+{"intent": "if limit is None or length of x is lesser than or equal to limit,", "snippet": "if limit is None or len ( x ) <= limit :"}
+{"intent": "return x.", "snippet": "return x"}
+{"intent": "return a string '%s...' formated with elements of x up to the index equal to the maximum value between integer 0 and 3 subtracted from limit.", "snippet": "return '%s...' % x [ : max ( 0 , limit - 3 ) ]"}
+{"intent": "if text is an instance of SafeData, safe_input is boolean True, otherwise is boolean False.", "snippet": "safe_input = isinstance ( text , SafeData )"}
+{"intent": "call the function force_text with an argument text, split by it word_split_re, substitute it for words.", "snippet": "words = word_split_re . split ( force_text ( text ) )"}
+{"intent": "for every i and word in enumerated iterable words,", "snippet": "for i , word in enumerate ( words ) :"}
+{"intent": "if '.' is contained in words or '@' is contained in word or ':' is contained in word,", "snippet": "if '.' in word or '@' in word or ':' in word :"}
+{"intent": "substitute empty string, word an empty string for lead, middle and trail, respectively.", "snippet": "lead , middle , trail = '' , word , ''"}
+{"intent": "for every punctuation in TRAILING_PUNCTUATION,", "snippet": "for punctuation in TRAILING_PUNCTUATION :"}
+{"intent": "if middle ends with punctuation,", "snippet": "if middle . endswith ( punctuation ) :"}
+{"intent": "substitute elements of middle from the beginning to the negative length of punctuation, for middle.", "snippet": "middle = middle [ : - len ( punctuation ) ]"}
+{"intent": "sum punctuation and trail, substitute the result for trail.", "snippet": "trail = punctuation + trail"}
+{"intent": "for every opening and closing in WRAPPING_PUNCTUATION,", "snippet": "for opening , closing in WRAPPING_PUNCTUATION :"}
+{"intent": "if middle starts with opening,", "snippet": "if middle . startswith ( opening ) :"}
+{"intent": "substitute elements of middle from length of opening index to the end, for middle.", "snippet": "middle = middle [ len ( opening ) : ]"}
+{"intent": "sum lead and opening, substitute the result for lead.", "snippet": "lead = lead + opening"}
+{"intent": "if middle ends with closing and count of occurrence of closing in middle equals count of occurrence of opening in middle incremented by one,", "snippet": "if ( middle . endswith ( closing )  and middle . count ( closing ) == middle . count ( opening ) + 1 ) :"}
+{"intent": "substitute elements of middle from the beginning to the negative length of closing, for middle.", "snippet": "middle = middle [ : - len ( closing ) ]"}
+{"intent": "sum trail and closing, substitute the result for lead.", "snippet": "trail = closing + trail"}
+{"intent": "url is None.", "snippet": "url = None"}
+{"intent": "if nofollow is true nofollow_attr is a string ' rel='nofollow'', otherwise nofollow_attr is an empty string.", "snippet": "nofollow_attr = ' rel='nofollow'' if nofollow else ''"}
+{"intent": "call the method simple_url_re.match with an argument middle, if it evaluates to true,", "snippet": "if simple_url_re . match ( middle ) :"}
+{"intent": "call the function smart_urlquote with an argument middle, substitute the result for url.", "snippet": "url = smart_urlquote ( middle )"}
+{"intent": "otherwise if call the method simple_url_2_re.match with an argument middle evaluates to true,", "snippet": "elif simple_url_2_re . match ( middle ) :"}
+{"intent": "call the function smart_urlquote with an argument string 'http://%s' formated with an argument middle, substitute the result for url.", "snippet": "url = smart_urlquote ( 'http://%s' % middle )"}
+{"intent": "otherwise if ':' is not contained in middle and result of the function simple_email_re.match called with an argument middle,", "snippet": "elif ':' not in middle and simple_email_re . match ( middle ) :"}
+{"intent": "evaluates to true,   split middle into two parts from the right by '@' character, assign the resulting parts to local and domain.", "snippet": "local , domain = middle . rsplit ( '@' , 1 )"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "call the method domain.encode with an argument string 'idna', call the method decode on the result with an argument string 'ascii',", "snippet": "domain = domain . encode ( 'idna' ) . decode ( 'ascii' )"}
+{"intent": "substitute the result for domain.   if UnicodeError exception is caught,", "snippet": "except UnicodeError :"}
+{"intent": "skip this loop iteration.", "snippet": "continue"}
+{"intent": "url is a string 'mailto:%s@%s' formated with local and domain.", "snippet": "url = 'mailto:%s@%s' % ( local , domain )"}
+{"intent": "nofollow_attr is an empty string.", "snippet": "nofollow_attr = ''"}
+{"intent": "if url is true,", "snippet": "if url :"}
+{"intent": "call the function trim_url with an argument middle, substitute the result for trimmed.", "snippet": "trimmed = trim_url ( middle )"}
+{"intent": "if autoescape is true and safe_input is false,", "snippet": "if autoescape and not safe_input :"}
+{"intent": "call the function escape with an argument lead, substitute the result for lead, call the function escape with an argument trail,", "snippet": "lead , trail = escape ( lead ) , escape ( trail )"}
+{"intent": "substitute the result for trail.   call the function escape with an argument url, substitute the result for url, call the function escape with an argument trimmed,", "snippet": "url , trimmed = escape ( url ) , escape ( trimmed )"}
+{"intent": "substitute the result for trimmed.   middle is a string '<a href='%s'%s>%s</a>' formated with url, nofollow_attr and trimmed.", "snippet": "middle = '<a href='%s'%s>%s</a>' % ( url , nofollow_attr , trimmed )"}
+{"intent": "format string '<a href='%s'%s>%s</a>' with lead, middle and trail, use it as an argument for the call to the function mark_safe,", "snippet": "words [ i ] = mark_safe ( '%s%s%s' % ( lead , middle , trail ) )"}
+{"intent": "substitute the result for i-th element of words.   if not,", "snippet": "else :"}
+{"intent": "if safe_input is true,", "snippet": "if safe_input :"}
+{"intent": "call the function mark_safe with an argument word, substitute the result for i-th element of words.", "snippet": "words [ i ] = mark_safe ( word )"}
+{"intent": "otherwise if autoescape is true,", "snippet": "elif autoescape :"}
+{"intent": "call the function escape with an argument word, substitute the result for i-th element of words.", "snippet": "words [ i ] = escape ( word )"}
+{"intent": "otherwise if safe_input is true,", "snippet": "elif safe_input :"}
+{"intent": "call the function mark_safe with an argument word, substitute the result for i-th element of words.", "snippet": "words [ i ] = mark_safe ( word )"}
+{"intent": "otherwise if autoescape is true,", "snippet": "elif autoescape :"}
+{"intent": "call the function escape with an argument word, substitute the result for i-th element of words.", "snippet": "words [ i ] = escape ( word )"}
+{"intent": "join elements of words into a string, return it.", "snippet": "return '' . join ( words )"}
+{"intent": "call the function allow_lazy with 2 arguments: urlize, six.text_type, substitute the result for urlize.", "snippet": "urlize = allow_lazy ( urlize , six . text_type )"}
+{"intent": "define the function avoid_wrapping with an argument value.", "snippet": "def avoid_wrapping ( value ) :"}
+{"intent": "replace every occurrence of ' ' in value for '\\xa0', return the result.", "snippet": "return value . replace ( ' ' , '\\xa0' )"}
+{"intent": "from django.utils.six.moves import html_parser as _html_parse into default name space.", "snippet": "from django . utils . six . moves import html_parser as _html_parser"}
+{"intent": "import module re.", "snippet": "import re"}
+{"intent": "import module sys.", "snippet": "import sys"}
+{"intent": "substitute version_info from module sys for surrent_version.", "snippet": "current_version = sys . version_info"}
+{"intent": "set use_workaround to boolean True if current_version tuple elements are smaller than the tuple (2,7,3), respectively,", "snippet": "use_workaround = (  ( current_version < ( 2 , 7 , 3 ) ) or  ( current_version >= ( 3 , 0 ) and current_version < ( 3 , 2 , 3 ) )  )"}
+{"intent": "or if current_version is greater than (3,0), but smaller than (3,2,3), otherwise set use_workaround to boolean False.   substitute HTMLParseError from the module _html_parser for HTMLParseError.", "snippet": "HTMLParseError = _html_parser . HTMLParseError"}
+{"intent": "if use_workaround is boolean False,", "snippet": "if not use_workaround :"}
+{"intent": "if tuple current_version elements are greater or equal to (3, 4), respectively,", "snippet": "if current_version >= ( 3 , 4 ) :"}
+{"intent": "derive the class HTMLParser from the base class HTMLParser located in the module _html_parser.", "snippet": "class HTMLParser ( _html_parser . HTMLParser ) :"}
+{"intent": "define the initialization method __init__, with self instance of this class, convert_charrefs set to boolean False,", "snippet": "def __init__ ( self , convert_charrefs = False , ** kwargs ) :"}
+{"intent": "and dictionary of arbitrary length **kwargs as arguments.   call the initialization method for the base class, _html_parser.HTMLParser.__init__ with self,", "snippet": "_html_parser . HTMLParser . __init__ ( self , convert_charrefs = convert_charrefs , ** kwargs )"}
+{"intent": "convert_charrefs set to convert_charrefs and dictionary **kwargs as the arguments.   if not,", "snippet": "else :"}
+{"intent": "substitute HTMLParser from the module _html_parser for HTMLParser.", "snippet": "HTMLParser = _html_parser . HTMLParser"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "compile a regular expression pattern string '([a-zA-Z][-.a-zA-Z0-9:_]*)(?:\\s|/(?!>))*' into a regular expression object and assign it to tagfind.", "snippet": "tagfind = re . compile ( '([a-zA-Z][-.a-zA-Z0-9:_]*)(?:\\s|/(?!>))*' )"}
+{"intent": "derive the class HTMLParser from the base class HTMLParser located in the module _html_parser.", "snippet": "class HTMLParser ( _html_parser . HTMLParser ) :"}
+{"intent": "define initialization method __init__ with self instance of the class as an argument.", "snippet": "def __init__ ( self ) :"}
+{"intent": "call the initialization method _html_parser.HTMLParser.__init__(self) for the base class.", "snippet": "_html_parser . HTMLParser . __init__ ( self )"}
+{"intent": "set field cdata_tag for this class instance to None.", "snippet": "self . cdata_tag = None"}
+{"intent": "define method set_cdata_mode, with self class instance and tag as the arguments.", "snippet": "def set_cdata_mode ( self , tag ) :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "set field interesting for this class instance to interesting_cdata from module _html_parser.", "snippet": "self . interesting = _html_parser . interesting_cdata"}
+{"intent": "if AttributeError exception is caught,", "snippet": "except AttributeError :"}
+{"intent": "replace '%s' in the string '</\\s*%s\\s*>' with the result of the function call tag.lower(),", "snippet": "self . interesting = re . compile ( r'</\\s*%s\\s*>' % tag . lower ( ) , re . I )"}
+{"intent": "use it and the re.I as the input arguments for function re.compile, put the result in the self.interesting.   evaluate function tag.lower, without the arguments, put the result in the self.cdata_tag.", "snippet": "self . cdata_tag = tag . lower ( )"}
+{"intent": "define method clear_cdata_mode, with self class instance as an argument.", "snippet": "def clear_cdata_mode ( self ) :"}
+{"intent": "substitute _html_parser.interesting_normal for self.interesting.", "snippet": "self . interesting = _html_parser . interesting_normal"}
+{"intent": "set self.cdata_tag to None.", "snippet": "self . cdata_tag = None"}
+{"intent": "define method parse_starttag with self class instance and i as the arguments.", "snippet": "def parse_starttag ( self , i ) :"}
+{"intent": "set self.__starttag_text to None.", "snippet": "self . __starttag_text = None"}
+{"intent": "call the method self.check_for_whole_start_tag with i as an argument, substitute result for the endpos.", "snippet": "endpos = self . check_for_whole_start_tag ( i )"}
+{"intent": "if endpos is lesser than zero,", "snippet": "if endpos < 0 :"}
+{"intent": "return endpos.", "snippet": "return endpos"}
+{"intent": "substitute self.rawdata for rawdata.", "snippet": "rawdata = self . rawdata"}
+{"intent": "slice the list from the i-th to the endpos-th element, substitute it for self.__starttag_text.", "snippet": "self . __starttag_text = rawdata [ i : endpos ]"}
+{"intent": "attrs is a empty list.", "snippet": "attrs = [ ]"}
+{"intent": "match the rawdata from the position i+1, with tagfind pattern, assign the result to the match.", "snippet": "match = tagfind . match ( rawdata , i + 1 )"}
+{"intent": "if match evaluates to False throw an exception with the string message 'unexpected call to parse_starttag()'.", "snippet": "assert match , 'unexpected call to parse_starttag()'"}
+{"intent": "find the ending position of the regular expression match of the object match, substitute the result for k.", "snippet": "k = match . end ( )"}
+{"intent": "find the first subgroup of the matched string from the match object, convert it to lowercase, substitute it for tag and self.lasttag.", "snippet": "self . lasttag = tag = match . group ( 1 ) . lower ( )"}
+{"intent": "as long k is smaller than endpos,", "snippet": "while k < endpos :"}
+{"intent": "match the rawdata from the position k, with attrfind pattern, assign the result to the m.", "snippet": "m = _html_parser . attrfind . match ( rawdata , k )"}
+{"intent": "if m is not False, None is considered False,", "snippet": "if not m :"}
+{"intent": "breaks from the smallest enclosing loop.", "snippet": "break"}
+{"intent": "find the first, second and third subgroup of the m regular expression match, assign the result to the attrname, rest and attrvalue, respectively.", "snippet": "attrname , rest , attrvalue = m . group ( 1 , 2 , 3 )"}
+{"intent": "if rest is not False, None is considered False,", "snippet": "if not rest :"}
+{"intent": "set attrvalue to None.", "snippet": "attrvalue = None"}
+{"intent": "otherwise, if first and the last character of attrvalue are '\\' charter  or first and last character of attrvalue are ''' character,", "snippet": "elif ( attrvalue [ : 1 ] == '\\'' == attrvalue [ - 1 : ] or  attrvalue [ : 1 ] == ''' == attrvalue [ - 1 : ] ) :"}
+{"intent": "remove first and last character from the attrvalue, substitute it for attrvalue.", "snippet": "attrvalue = attrvalue [ 1 : - 1 ]"}
+{"intent": "if attrvalue is not an empty string,", "snippet": "if attrvalue :"}
+{"intent": "call the method unescape with attrvalue as the argument on the self class instance, substitute the result for attrvalue.", "snippet": "attrvalue = self . unescape ( attrvalue )"}
+{"intent": "form the tuple from the attrname converted to lowercase and attrvalue, append it to the end of attrs.", "snippet": "attrs . append ( ( attrname . lower ( ) , attrvalue ) )"}
+{"intent": "find the ending position of the regular expression match of the object match, substitute the result for k.", "snippet": "k = m . end ( )"}
+{"intent": "slice the rawdata string from the k-th to the endpos-th index, remove the whitespaces from the start and the end of the string, substitute it for end.", "snippet": "end = rawdata [ k : endpos ] . strip ( )"}
+{"intent": "if end is not a '>' or '/>' character,", "snippet": "if end not in ( '>' , '/>' ) :"}
+{"intent": "evaluate the self.getpos() and assign the result to the lineno and offset respectfully.", "snippet": "lineno , offset = self . getpos ( )"}
+{"intent": "if self.__stattag_text contains newline character,", "snippet": "if '\\n' in self . __starttag_text :"}
+{"intent": "increment the lineno by the count of the newlines in self.__starttag_text.", "snippet": "lineno = lineno + self . __starttag_text . count ( '\\n' )"}
+{"intent": "find the last index of newline occurrence in self.__starttag_text, subtract it from total length of self.__starttag_text,", "snippet": "offset = ( len ( self . __starttag_text )  - self . __starttag_text . rfind ( '\\n' ) )"}
+{"intent": "substitute the result for offset.   if not,", "snippet": "else :"}
+{"intent": "increment the offset by the length of self.__starttag_text.", "snippet": "offset = offset + len ( self . __starttag_text )"}
+{"intent": "slice the rawdata from k to endpos, then take the first 20 elements of the previous slice,", "snippet": "self . error ( 'junk characters in start tag: %r'  % ( rawdata [ k : endpos ] [ : 20 ] , ) )"}
+{"intent": "with it replace %r in the string 'junk characters in start tag: %r',   call the method self.error with the resulting string as an argument.   if string end ends with string '/>',", "snippet": "if end . endswith ( '/>' ) :"}
+{"intent": "call the method self.handle_startendtag with tag and attrs as the arguments.", "snippet": "self . handle_startendtag ( tag , attrs )"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "call the method self.handle_starttag, with tag and attrs as the arguments.", "snippet": "self . handle_starttag ( tag , attrs )"}
+{"intent": "if tag is contained in self.CDATA_CONTENT_ELEMENTS,", "snippet": "if tag in self . CDATA_CONTENT_ELEMENTS :"}
+{"intent": "call the method self.set_cdata_mode with tag as the argument.", "snippet": "self . set_cdata_mode ( tag )"}
+{"intent": "return endpos.", "snippet": "return endpos"}
+{"intent": "define the method parse_endtag with self class instance and i as the arguments.", "snippet": "def parse_endtag ( self , i ) :"}
+{"intent": "substitute self.rawdata for rawdata.", "snippet": "rawdata = self . rawdata"}
+{"intent": "take two characters from the i-th element of rawdata, if they are not equal to the string '</',", "snippet": "assert rawdata [ i : i + 2 ] == '</' , 'unexpected call to parse_endtag'"}
+{"intent": "throw an exception with string 'unexpected call to parse_endtag' as the message.   search anywhere in the rawdata string starting from the (i+1)-th element for the _html_parser.endendeag, replace the result for match.", "snippet": "match = _html_parser . endendtag . search ( rawdata , i + 1 )"}
+{"intent": "if there is no match,", "snippet": "if not match :"}
+{"intent": "return integer -1.", "snippet": "return - 1"}
+{"intent": "find the ending position of the regular expression match of the object match, substitute the result for j.", "snippet": "j = match . end ( )"}
+{"intent": "match the rawdata from the position i, with _html_parser.endtagfind pattern, assign the result to the match.", "snippet": "match = _html_parser . endtagfind . match ( rawdata , i )"}
+{"intent": "if there is no match,", "snippet": "if not match :"}
+{"intent": "if self.cdata_tag is not None,", "snippet": "if self . cdata_tag is not None :"}
+{"intent": "slice the rawdata to obtain substring from i-th to j-th element, use it as the argument for the method call to the self.handle_data.", "snippet": "self . handle_data ( rawdata [ i : j ] )"}
+{"intent": "return j.", "snippet": "return j"}
+{"intent": "slice the rawdata from i-th to the j-th element, replace with it '%r' in the string 'bad end tag: %r', use it to call the method self.error.", "snippet": "self . error ( 'bad end tag: %r' % ( rawdata [ i : j ] , ) )"}
+{"intent": "find the first subgroup of the matched string from the match object, strip the whitespaces from the begging and end, replace it for tag.", "snippet": "tag = match . group ( 1 ) . strip ( )"}
+{"intent": "if self.cdata_tag is not None,", "snippet": "if self . cdata_tag is not None :"}
+{"intent": "convert tag to lowercase if it is not equal to self.cdata_tag,", "snippet": "if tag . lower ( ) != self . cdata_tag :"}
+{"intent": "slice the rawdata to obtain substring from i-th to j-th element, use it as the argument for the method call to the self.handle_data.", "snippet": "self . handle_data ( rawdata [ i : j ] )"}
+{"intent": "return j.", "snippet": "return j"}
+{"intent": "convert tag to lowercase, use it as the argument for the call to the method self.handle_endtag.", "snippet": "self . handle_endtag ( tag . lower ( ) )"}
+{"intent": "call the method self.clear_cdata_mode.", "snippet": "self . clear_cdata_mode ( )"}
+{"intent": "return j.", "snippet": "return j"}
+{"intent": "from __future__ import unicode_literals into default name space.", "snippet": "from __future__ import unicode_literals"}
+{"intent": "import module base64.", "snippet": "import base64"}
+{"intent": "import module calendar.", "snippet": "import calendar"}
+{"intent": "import module datetime.", "snippet": "import datetime"}
+{"intent": "import module re.", "snippet": "import re"}
+{"intent": "import module sys.", "snippet": "import sys"}
+{"intent": "from binascii import Error as BinasciiError into default name space.", "snippet": "from binascii import Error as BinasciiError"}
+{"intent": "from email.utils import formatdate into default name space.", "snippet": "from email . utils import formatdate"}
+{"intent": "from django.utils.datastructures import MultiValueDict into default name space.", "snippet": "from django . utils . datastructures import MultiValueDict"}
+{"intent": "from django.utils.encoding import force_str and force_text into default name space.", "snippet": "from django . utils . encoding import force_str , force_text"}
+{"intent": "from django.utils.functional import allow_lazy into default name space.", "snippet": "from django . utils . functional import allow_lazy"}
+{"intent": "from django.utils import six into default name space.", "snippet": "from django . utils import six"}
+{"intent": "from django.utils.six.moves.urllib.parse import quote, quote_plus, unquote, unquote_plus, urlparse, urlencode as original_urlencode.", "snippet": "from django . utils . six . moves . urllib . parse import (  quote , quote_plus , unquote , unquote_plus , urlparse ,  urlencode as original_urlencode )"}
+{"intent": "call the function re.compile with an argument raw string '(?:W/)?'((?:\\\\.|[^'])*)'', substitute the result for ETAG_MATCH.", "snippet": "ETAG_MATCH = re . compile ( r'(?:W/)?'((?:\\\\.|[^'])*)'' )"}
+{"intent": "MONTHS is a list with 12 elements: strings 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', and 'dec'.", "snippet": "MONTHS = 'jan feb mar apr may jun jul aug sep oct nov dec' . split ( )"}
+{"intent": "__D is a raw string '(?P<day>\\d\\{2\\})'.", "snippet": "__D = r'(?P<day>\\d\\{2\\})'"}
+{"intent": "__D2 is a raw string '(?P<day>[ \\d]\\d)'.", "snippet": "__D2 = r'(?P<day>[ \\d]\\d)'"}
+{"intent": "__M is a raw string '(?P<mon>\\w\\{3\\})'.", "snippet": "__M = r'(?P<mon>\\w\\{3\\})'"}
+{"intent": "__Y is a raw string '(?P<year>\\d\\{4\\})'.", "snippet": "__Y = r'(?P<year>\\d\\{4\\})'"}
+{"intent": "__Y2 is a raw string '(?P<year>\\d\\{2\\})'.", "snippet": "__Y2 = r'(?P<year>\\d\\{2\\})'"}
+{"intent": "__T is a raw string '(?P<hour>\\d\\{2\\}):(?P<min>\\d\\{2\\}):(?P<sec>\\d\\{2\\})'.", "snippet": "__T = r'(?P<hour>\\d\\{2\\}):(?P<min>\\d\\{2\\}):(?P<sec>\\d\\{2\\})'"}
+{"intent": "call the function re.compile with an argument raw string '^\\w\\{3\\}, %s %s %s %s GMT$' formated with __D, __M, __Y and __T,", "snippet": "RFC1123_DATE = re . compile ( r'^\\w\\{3\\}, %s %s %s %s GMT$' % ( __D , __M , __Y , __T ) )"}
+{"intent": "substitute the result for RFC1123_DATE.   call the function re.compile with an argument raw string '^\\w\\{6,9\\}, %s-%s-%s %s GMT$' formated with __D, __M, __Y2 and __T,", "snippet": "RFC850_DATE = re . compile ( r'^\\w\\{6,9\\}, %s-%s-%s %s GMT$' % ( __D , __M , __Y2 , __T ) )"}
+{"intent": "substitute the result for RFC850_DATE.   call the function re.compile with an argument raw string '^\\w\\{3\\} %s %s %s %s$' formated with __M, __D2, __T and __Y,", "snippet": "ASCTIME_DATE = re . compile ( r'^\\w\\{3\\} %s %s %s %s$' % ( __M , __D2 , __T , __Y ) )"}
+{"intent": "substitute the result for ASCTIME_DATE.   define the function urlquote with 2 arguments: url and safe set to '/'.", "snippet": "def urlquote ( url , safe = '/' ) :"}
+{"intent": "call the function quote with 2 arguments: result of the function force_str called with an argument url,", "snippet": "return force_text ( quote ( force_str ( url ) , force_str ( safe ) ) )"}
+{"intent": "and result of the function force_str called with an argument safe,   use the result as an argument for the call to the function force_text, return the result.   call the function allow_lazy with 2 arguments: urlquote and six.text_type, substitute the result for urlquote.", "snippet": "urlquote = allow_lazy ( urlquote , six . text_type )"}
+{"intent": "define the function urlquote_plus with 2 arguments: url and safe set to an empty string.", "snippet": "def urlquote_plus ( url , safe = '' ) :"}
+{"intent": "call the function quote_plus with 2 arguments: result of the function force_str called with an argument url,", "snippet": "return force_text ( quote_plus ( force_str ( url ) , force_str ( safe ) ) )"}
+{"intent": "and result of the function force_str called with an argument safe,   use the result as an argument for the call to the function force_text, return the result.   call the function allow_lazy with 2 arguments: urlquote_plus and six.text_type, substitute the result for urlquote_plus.", "snippet": "urlquote_plus = allow_lazy ( urlquote_plus , six . text_type )"}
+{"intent": "define the function urlunquote with an argument quoted_url.", "snippet": "def urlunquote ( quoted_url ) :"}
+{"intent": "call the function force_str with an argument quoted_url, use the result as an argument for the call to the function unquote,", "snippet": "return force_text ( unquote ( force_str ( quoted_url ) ) )"}
+{"intent": "use the result as an argument for the call to the function force_text, return the result.   call the function allow_lazy with 2 arguments: urlunquote and six.text_type, substitute the result for urlunquote.", "snippet": "urlunquote = allow_lazy ( urlunquote , six . text_type )"}
+{"intent": "define the function urlunquote with an argument quoted_url.", "snippet": "def urlunquote_plus ( quoted_url ) :"}
+{"intent": "call the function force_str with an argument quoted_url, use the result as an argument for the call to the function unquote_plus,", "snippet": "return force_text ( unquote_plus ( force_str ( quoted_url ) ) )"}
+{"intent": "use the result as an argument for the call to the function force_text, return the result.   call the function allow_lazy with 2 arguments: urlunquote_plus and six.text_type, substitute the result for urlunquote_plus.", "snippet": "urlunquote_plus = allow_lazy ( urlunquote_plus , six . text_type )"}
+{"intent": "define the function urlencode with 2 arguments query and doseq set to integer 0.", "snippet": "def urlencode ( query , doseq = 0 ) :"}
+{"intent": "if query is an instance of MultiValueDict class,", "snippet": "if isinstance ( query , MultiValueDict ) :"}
+{"intent": "call the method query.lists, substitute the result for query.", "snippet": "query = query . lists ( )"}
+{"intent": "otherwise if query has an attribute 'items',", "snippet": "elif hasattr ( query , 'items' ) :"}
+{"intent": "call the method query.items, substitute the result for query.", "snippet": "query = query . items ( )"}
+{"intent": "call the function original_urlencode with 2 arguments: list with 2 elements: result of the function force_str with an argument k,", "snippet": "return original_urlencode (  [ ( force_str ( k ) ,  [ force_str ( i ) for i in v ] if isinstance ( v , ( list , tuple ) ) else force_str ( v ) )  for k , v in query ] ,  doseq )"}
+{"intent": "and list with results of the function force_str with an argument i, for every i in v, only if v is a list or a tuple,   otherwise second element is result of the function force_str with an argument v, for every k and v in query,   and doseq, return the result.   define the function cookie_date with an argument epoch_seconds set to None.", "snippet": "def cookie_date ( epoch_seconds = None ) :"}
+{"intent": "call the function formatdate with an argument epoch_seconds, substitute the result for rfcdate.", "snippet": "rfcdate = formatdate ( epoch_seconds )"}
+{"intent": "return a string '%s-%s-%s GMT', formated with: first 7 elements of rfcdate, elements of rfcdate from 8-th to the 11-th index,", "snippet": "return '%s-%s-%s GMT' % ( rfcdate [ : 7 ] , rfcdate [ 8 : 11 ] , rfcdate [ 12 : 25 ] )"}
+{"intent": "and elements of rfcdate from 12-th to the 25-th index.   define the function http_date with an argument epoch_seconds set to None.", "snippet": "def http_date ( epoch_seconds = None ) :"}
+{"intent": "call the function formatdate with 2 arguments: epoch_seconds and usegmt set to boolean True, return the result.", "snippet": "return formatdate ( epoch_seconds , usegmt = True )"}
+{"intent": "define the function parse_http_date with an argument date.", "snippet": "def parse_http_date ( date ) :"}
+{"intent": "for every regex in tuple with 3 elements: RFC1123_DATE, RFC850_DATE and ASCTIME_DATE,", "snippet": "for regex in RFC1123_DATE , RFC850_DATE , ASCTIME_DATE :"}
+{"intent": "call the method regex.match with an argument date, substitute the result for m.", "snippet": "m = regex . match ( date )"}
+{"intent": "if m is not None,", "snippet": "if m is not None :"}
+{"intent": "break from the loop execution.", "snippet": "break"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "raise an ValueError exception with an argument string '%r is not in a valid HTTP date format' formated with date.", "snippet": "raise ValueError ( '%r is not in a valid HTTP date format' % date )"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "call the method m.group with an argument string 'year', convert the result into a string, substitute it for year.", "snippet": "year = int ( m . group ( 'year' ) )"}
+{"intent": "if year is lesser than integer 100,", "snippet": "if year < 100 :"}
+{"intent": "if year is lesser than integer 70,", "snippet": "if year < 70 :"}
+{"intent": "increment year by integer 2000.", "snippet": "year += 2000"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "increment year by integer 1900.", "snippet": "year += 1900"}
+{"intent": "call the method m.group with an argument string 'mon', convert the result to lowercase, use it as an argument for the call to the,", "snippet": "month = MONTHS . index ( m . group ( 'mon' ) . lower ( ) ) + 1"}
+{"intent": "method MONTHS.index, increment the result by integer 1, substitute it for month.   call the method m.group with an argument string 'fay', convert the result into a string, substitute it for day.", "snippet": "day = int ( m . group ( 'day' ) )"}
+{"intent": "call the method m.group with an argument string 'hour', convert the result into a string, substitute it for hour.", "snippet": "hour = int ( m . group ( 'hour' ) )"}
+{"intent": "call the method m.group with an argument string 'min', convert the result into a string, substitute it for min.", "snippet": "min = int ( m . group ( 'min' ) )"}
+{"intent": "call the method m.group with an argument string 'sec', convert the result into a string, substitute it for sec.", "snippet": "sec = int ( m . group ( 'sec' ) )"}
+{"intent": "call the method MONTHS.index with 6 arguments: year, month, day, hour, min and sec, substitute the result for result.", "snippet": "result = datetime . datetime ( year , month , day , hour , min , sec )"}
+{"intent": "call the method result.utctimetuple, use the result as an argument for the call to the method calendar.timegm, return the result.", "snippet": "return calendar . timegm ( result . utctimetuple ( ) )"}
+{"intent": "if Exception exception is caught.", "snippet": "except Exception :"}
+{"intent": "call the function six.reraise with 3 arguments: ValueError, instance of a class ValueError, created with an argument string,", "snippet": "six . reraise ( ValueError , ValueError ( '%r is not a valid date' % date ) , sys . exc_info ( ) [ 2 ] )"}
+{"intent": "'%r is not a valid date' formated with date and third element of the result of the function sys.exc_info.   define the function parse_http_date_safe an argument date.", "snippet": "def parse_http_date_safe ( date ) :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "call the function parse_http_date with an argument date, return the result.", "snippet": "return parse_http_date ( date )"}
+{"intent": "if Exception exception is caught.", "snippet": "except Exception :"}
+{"intent": "do nothing.", "snippet": "pass"}
+{"intent": "define the functionbase36_to_int with an argument s.", "snippet": "def base36_to_int ( s ) :"}
+{"intent": "if length of s is greater than integer 13,", "snippet": "if len ( s ) > 13 :"}
+{"intent": "raise an ValueError exception with an argument string 'Base36 input too large'.", "snippet": "raise ValueError ( 'Base36 input too large' )"}
+{"intent": "convert s to integer of base 36, substitute it for value.", "snippet": "value = int ( s , 36 )"}
+{"intent": "if six.PY2 is true and value is greater than sys.maxint,", "snippet": "if six . PY2 and value > sys . maxint :"}
+{"intent": "raise an ValueError exception with an argument string 'Base36 input too large'.", "snippet": "raise ValueError ( 'Base36 input too large' )"}
+{"intent": "return value.", "snippet": "return value"}
+{"intent": "define the function int_to_base36 with an argument i.", "snippet": "def int_to_base36 ( i ) :"}
+{"intent": "digits is a string '0123456789abcdefghijklmnopqrstuvwxyz'.", "snippet": "digits = '0123456789abcdefghijklmnopqrstuvwxyz'"}
+{"intent": "factor is integer 0.", "snippet": "factor = 0"}
+{"intent": "if i is smaller than integer 0,", "snippet": "if i < 0 :"}
+{"intent": "raise an ValueError exception with an argument string 'Negative base36 conversion input.'.", "snippet": "raise ValueError ( 'Negative base36 conversion input.' )"}
+{"intent": "if six.PY2 is true,", "snippet": "if six . PY2 :"}
+{"intent": "if i is not an instance of six.integer_types class,", "snippet": "if not isinstance ( i , six . integer_types ) :"}
+{"intent": "raise an TypeError exception with an argument string 'Non-integer base36 conversion input.'.", "snippet": "raise TypeError ( 'Non-integer base36 conversion input.' )"}
+{"intent": "if i is greater than sys.maxint,", "snippet": "if i > sys . maxint :"}
+{"intent": "raise an ValueError exception with an argument string 'Base36 conversion input too large.'.", "snippet": "raise ValueError ( 'Base36 conversion input too large.' )"}
+{"intent": "endless loop,", "snippet": "while True :"}
+{"intent": "increment factor by one.", "snippet": "factor += 1"}
+{"intent": "bring integer 36 to the power of factor, if i is smaller than the result,", "snippet": "if i < 36 ** factor :"}
+{"intent": "decrement factor by one.", "snippet": "factor -= 1"}
+{"intent": "break from the loop execution.", "snippet": "break"}
+{"intent": "base36 is an empty list.", "snippet": "base36 = [ ]"}
+{"intent": "while factor is greater or equal to integer 0,", "snippet": "while factor >= 0 :"}
+{"intent": "bring integer 36 to the power of factor, substitute the result for j.", "snippet": "j = 36 ** factor"}
+{"intent": "floor the division of i by j, use it an an index to get the element of the digits list, append the result for base36.", "snippet": "base36 . append ( digits [ i // j ] )"}
+{"intent": "i is the reminder of the division of i by j.", "snippet": "i = i % j"}
+{"intent": "decrement factor by one.", "snippet": "factor -= 1"}
+{"intent": "join elements of base36 into a string, return it.", "snippet": "return '' . join ( base36 )"}
+{"intent": "define the function urlsafe_base64_encode with an argument s.", "snippet": "def urlsafe_base64_encode ( s ) :"}
+{"intent": "call the method base64.urlsafe_b64encode with an argument s, strip the result of the bytes string '\\n=' from the right, return it.", "snippet": "return base64 . urlsafe_b64encode ( s ) . rstrip ( b'\\n=' )"}
+{"intent": "define the function urlsafe_base64_decode with an argument s.", "snippet": "def urlsafe_base64_decode ( s ) :"}
+{"intent": "call the method s.encode with an argument string 'utf-8', substitute the result for s.", "snippet": "s = s . encode ( 'utf-8' )"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "left justify string s in a field of width equal to the sum of length of s and reminder of the division of length of s by integer 4,", "snippet": "return base64 . urlsafe_b64decode ( s . ljust ( len ( s ) + len ( s ) % 4 , b'=' ) )"}
+{"intent": "pad the rest of the field with bytes string '=', use the result as an argument for the call to the method base64.urlsafe_b64decode,   return the result.   if LookupError or BinasciiError, renamed to e, exceptions are caught.", "snippet": "except ( LookupError , BinasciiError ) as e :"}
+{"intent": "raise an ValueError exception with an argument e.", "snippet": "raise ValueError ( e )"}
+{"intent": "define the function parse_etags with an argument etag_str.", "snippet": "def parse_etags ( etag_str ) :"}
+{"intent": "call the method ETAG_MATCH.findall with an argument etag_str, substitute the result for etags.", "snippet": "etags = ETAG_MATCH . findall ( etag_str )"}
+{"intent": "if etags is false,", "snippet": "if not etags :"}
+{"intent": "return a list with an element etag_str.", "snippet": "return [ etag_str ]"}
+{"intent": "for every e in etags call the method e.encode with an argument string 'ascii', call the method decode on the result with an argument,", "snippet": "etags = [ e . encode ( 'ascii' ) . decode ( 'unicode_escape' ) for e in etags ]"}
+{"intent": "string 'unicode_escape', substitute the list of results for etags.   return etags.", "snippet": "return etags"}
+{"intent": "define the function quote_etag with an argument etag.", "snippet": "def quote_etag ( etag ) :"}
+{"intent": "return a string ''%s'' formated with etag, in which every occurrence of '\\\\' is replaced with '\\\\\\\\' and every occurrence of ''',", "snippet": "return ''%s'' % etag . replace ( '\\\\' , '\\\\\\\\' ) . replace ( ''' , '\\\\'' )"}
+{"intent": "is replaced with '\\\\''.   define the function same_origin with 2 arguments url1 and url2.", "snippet": "def same_origin ( url1 , url2 ) :"}
+{"intent": "substitute result of the function urlparse with an argument ur1 for p1 and result of the function urlparse with an argument ur2 for p2.", "snippet": "p1 , p2 = urlparse ( url1 ) , urlparse ( url2 )"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "if p2.scheme, p2.hostname and p2.port equals p1.scheme, p1.hostname and p1.port, respectively, return boolean True, otherwise return boolean False.", "snippet": "return ( p1 . scheme , p1 . hostname , p1 . port ) == ( p2 . scheme , p2 . hostname , p2 . port )"}
+{"intent": "if ValueError exception is caught.", "snippet": "except ValueError :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "define the function is_safe_url with 2 arguments url and host set to None.", "snippet": "def is_safe_url ( url , host = None ) :"}
+{"intent": "if url is false,", "snippet": "if not url :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "replace every occurrence of '\\\\' in url with '/'.", "snippet": "url = url . replace ( '\\\\' , '/' )"}
+{"intent": "if url starts with '///',", "snippet": "if url . startswith ( '///' ) :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "call the function urlparse with an argument url, substitute the result for url_info.", "snippet": "url_info = urlparse ( url )"}
+{"intent": "if url_info.netloc is false and url_info.scheme is true,", "snippet": "if not url_info . netloc and url_info . scheme :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "if url_info.netloc is false or url_info.netloc equals host, and if url_info.scheme is false or url_info.scheme equals,", "snippet": "return ( ( not url_info . netloc or url_info . netloc == host ) and  ( not url_info . scheme or url_info . scheme in [ 'http' , 'https' ] ) )"}
+{"intent": "import module warnings.", "snippet": "import warnings"}
+{"intent": "import module sys.", "snippet": "import sys"}
+{"intent": "from django.utils import six into default name space.", "snippet": "from django . utils import six"}
+{"intent": "from django.utils.deprecation import RemovedInDjango19Warning into default name space.", "snippet": "from django . utils . deprecation import RemovedInDjango19Warning"}
+{"intent": "call the function warnings.warn with 3 arguments: string 'django.utils.importlib will be removed in Django 1.9.',", "snippet": "warnings . warn ( 'django.utils.importlib will be removed in Django 1.9.' ,  RemovedInDjango19Warning , stacklevel = 2 )"}
+{"intent": "RemovedInDjango19Warning and stacklevel set to integer 2.   define the function _resolve_name with 3 arguments: name, package and level.", "snippet": "def _resolve_name ( name , package , level ) :"}
+{"intent": "if package doesnt have an 'rindex' attribute,", "snippet": "if not hasattr ( package , 'rindex' ) :"}
+{"intent": "raise an ValueError with an argument string ''package' not set to a string'.", "snippet": "raise ValueError ( ''package' not set to a string' )"}
+{"intent": "substitute length of package for dot.", "snippet": "dot = len ( package )"}
+{"intent": "for every x is the range of integers from level to the integer 2, in the reversed order,", "snippet": "for x in range ( level , 1 , - 1 ) :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "call the method package.rindex with 3 arguments: string '.', integer 0 and dot, substitute the result for dot.", "snippet": "dot = package . rindex ( '.' , 0 , dot )"}
+{"intent": "if ValueError exception is caught,", "snippet": "except ValueError :"}
+{"intent": "raise an ValueError with an argument string 'attempted relative import beyond top-level package'.", "snippet": "raise ValueError ( 'attempted relative import beyond top-level package' )"}
+{"intent": "return a string '%s.%s' formated with first dot package elements and name.", "snippet": "return '%s.%s' % ( package [ : dot ] , name )"}
+{"intent": "if six.PY3 is true,", "snippet": "if six . PY3 :"}
+{"intent": "from importlib import import_module.", "snippet": "from importlib import import_module"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "define the function import_module with 3 arguments: name and package set to None.", "snippet": "def import_module ( name , package = None ) :"}
+{"intent": "if name starts with an string '.',", "snippet": "if name . startswith ( '.' ) :"}
+{"intent": "if package is false,", "snippet": "if not package :"}
+{"intent": "raise an TypeError with an argument string 'relative imports require the 'package' argument'.", "snippet": "raise TypeError ( 'relative imports require the 'package' argument' )"}
+{"intent": "level is an integer 0.", "snippet": "level = 0"}
+{"intent": "for every character in name,", "snippet": "for character in name :"}
+{"intent": "if character is not equal to a string '.',", "snippet": "if character != '.' :"}
+{"intent": "break from the loop execution.", "snippet": "break"}
+{"intent": "increment level by one.", "snippet": "level += 1"}
+{"intent": "call the function _resolve_name with 3 arguments: name list elements from the level index to the end, package and level,", "snippet": "name = _resolve_name ( name [ level : ] , package , level )"}
+{"intent": "substitute the result for name.   call the function __import__ with an argument name.", "snippet": "__import__ ( name )"}
+{"intent": "return sys.modules dictionary value under the name key.", "snippet": "return sys . modules [ name ]"}
+{"intent": "from django.core.exceptions import ValidationError into default name space.", "snippet": "from django . core . exceptions import ValidationError"}
+{"intent": "from django.utils.translation import ugettext_lazy as _ into default name space.", "snippet": "from django . utils . translation import ugettext_lazy as _"}
+{"intent": "from django.utils.six.moves import xrange into default name space.", "snippet": "from django . utils . six . moves import xrange"}
+{"intent": "define the function clean_ipv6_address with 3 arguments: ip_str, unpack_ipv4 set to boolean False and error_message,", "snippet": "def clean_ipv6_address ( ip_str , unpack_ipv4 = False ,  error_message = _ ( 'This is not a valid IPv6 address.' ) ) :"}
+{"intent": "best_doublecolon_start is an integer -1.", "snippet": "best_doublecolon_start = - 1"}
+{"intent": "best_doublecolon_len is an integer 0.", "snippet": "best_doublecolon_len = 0"}
+{"intent": "doublecolon_start is an integer -1.", "snippet": "doublecolon_start = - 1"}
+{"intent": "doublecolon_len is an integer 0.", "snippet": "doublecolon_len = 0"}
+{"intent": "call he function is_valid_ipv6_address with an argument ip_str, if it evaluates to false,", "snippet": "if not is_valid_ipv6_address ( ip_str ) :"}
+{"intent": "raise an ValidationError exception with 2 arguments: error_message and code as a string 'invalid'.", "snippet": "raise ValidationError ( error_message , code = 'invalid' )"}
+{"intent": "call the function _explode_shorthand_ip_string with an argument ip_str, substitute the result for ip_str.", "snippet": "ip_str = _explode_shorthand_ip_string ( ip_str )"}
+{"intent": "call the function _explode_shorthand_ip_string with an argument ip_str, substitute the result for ip_str.", "snippet": "ip_str = _sanitize_ipv4_mapping ( ip_str )"}
+{"intent": "if unpack_ipv4 is true,", "snippet": "if unpack_ipv4 :"}
+{"intent": "call the function _unpack_ipv4 with an argument ip_str, substitute the result for ipv4_unpacked.", "snippet": "ipv4_unpacked = _unpack_ipv4 ( ip_str )"}
+{"intent": "if ipv4_unpacked is true,", "snippet": "if ipv4_unpacked :"}
+{"intent": "return ipv4_unpacked.", "snippet": "return ipv4_unpacked"}
+{"intent": "split ip_str by ':', substitute the result for hextets.", "snippet": "hextets = ip_str . split ( ':' )"}
+{"intent": "for every index in range of integers from 0 to length of hextets, not included,", "snippet": "for index in range ( len ( hextets ) ) :"}
+{"intent": "get the value under the index key of the hextets dictionary, remove the leading '0' characters,", "snippet": "hextets [ index ] = hextets [ index ] . lstrip ( '0' )"}
+{"intent": "substitute the result for value under the index key of the hextets dictionary.   get the value under the index key of the hextets dictionary, if it is false,", "snippet": "if not hextets [ index ] :"}
+{"intent": "value under the index key of the hextets dictionary is a string '0'.", "snippet": "hextets [ index ] = '0'"}
+{"intent": "if value under the index key of the hextets dictionary equals to string '0',", "snippet": "if hextets [ index ] == '0' :"}
+{"intent": "increment doublecolon_len by integer 1,", "snippet": "doublecolon_len += 1"}
+{"intent": "if doublecolon_start equals integer -1,", "snippet": "if doublecolon_start == - 1 :"}
+{"intent": "substitute index for doublecolon_start.", "snippet": "doublecolon_start = index"}
+{"intent": "if doublecolon_len is greater than best_doublecolon_len,", "snippet": "if doublecolon_len > best_doublecolon_len :"}
+{"intent": "substitute doublecolon_len for best_doublecolon_len.", "snippet": "best_doublecolon_len = doublecolon_len"}
+{"intent": "substitute doublecolon_start for best_doublecolon_start.", "snippet": "best_doublecolon_start = doublecolon_start"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "doublecolon_len is integer 0.", "snippet": "doublecolon_len = 0"}
+{"intent": "doublecolon_start is integer -1.", "snippet": "doublecolon_start = - 1"}
+{"intent": "if best_doublecolon_len is greater than integer 1,", "snippet": "if best_doublecolon_len > 1 :"}
+{"intent": "sum best_doublecolon_start and best_doublecolon_len, substitute the result for best_doublecolon_end,", "snippet": "best_doublecolon_end = ( best_doublecolon_start +  best_doublecolon_len )"}
+{"intent": "if best_doublecolon_end equals length of hextets,", "snippet": "if best_doublecolon_end == len ( hextets ) :"}
+{"intent": "append an empty string to list hextets.", "snippet": "hextets += [ '' ]"}
+{"intent": "replace hextets list from the best_doublecolon_start index to best_doublecolon_end index with an empty string.", "snippet": "hextets [ best_doublecolon_start : best_doublecolon_end ] = [ '' ]"}
+{"intent": "if best_doublecolon_start equals integer 0,", "snippet": "if best_doublecolon_start == 0 :"}
+{"intent": "prepend an empty string to hextets list.", "snippet": "hextets = [ '' ] + hextets"}
+{"intent": "join elements of hextets into a string, separated with ':', substitute it for result.", "snippet": "result = ':' . join ( hextets )"}
+{"intent": "convert result to lowercase and return it.", "snippet": "return result . lower ( )"}
+{"intent": "define the function _sanitize_ipv4_mapping with an argument ip_str.", "snippet": "def _sanitize_ipv4_mapping ( ip_str ) :"}
+{"intent": "convert ip_str to lowercase, if it doesnt start with a string '0000:0000:0000:0000:0000:ffff:',", "snippet": "if not ip_str . lower ( ) . startswith ( '0000:0000:0000:0000:0000:ffff:' ) :"}
+{"intent": "return ip_str.", "snippet": "return ip_str"}
+{"intent": "split ip_str into parts by ':', substitute the result for hextets.", "snippet": "hextets = ip_str . split ( ':' )"}
+{"intent": "if '.' is contained in last elements of hextets,", "snippet": "if '.' in hextets [ - 1 ] :"}
+{"intent": "return ip_str.", "snippet": "return ip_str"}
+{"intent": "ipv4_address is a string '%d.%d.%d.%d' formated with first 2 elements of seventh element of hextets converted into hexadecimal number,", "snippet": "ipv4_address = '%d.%d.%d.%d' % (  int ( hextets [ 6 ] [ 0 : 2 ] , 16 ) ,  int ( hextets [ 6 ] [ 2 : 4 ] , 16 ) ,  int ( hextets [ 7 ] [ 0 : 2 ] , 16 ) ,  int ( hextets [ 7 ] [ 2 : 4 ] , 16 ) ,  )"}
+{"intent": "second 2 elements of seventh element of hextets converted into hexadecimal number,   first 2 elements of eight element of hextets converted into hexadecimal number,   second 2 elements of eight element of hextets converted into hexadecimal number.   join first 5 elements of hextets into a string, separated by ':', substitute the result for result.", "snippet": "result = ':' . join ( hextets [ 0 : 6 ] )"}
+{"intent": "append ':' and ipv4_address to result.", "snippet": "result += ':' + ipv4_address"}
+{"intent": "return result.", "snippet": "return result"}
+{"intent": "define the function _unpack_ipv4 with an argument ip_str.", "snippet": "def _unpack_ipv4 ( ip_str ) :"}
+{"intent": "convert ip_str to lowercase, if it doesnt start with a string '0000:0000:0000:0000:0000:ffff:',", "snippet": "if not ip_str . lower ( ) . startswith ( '0000:0000:0000:0000:0000:ffff:' ) :"}
+{"intent": "return None.", "snippet": "return None"}
+{"intent": "split ip_str into 2 parts from right, return second element of the result.", "snippet": "return ip_str . rsplit ( ':' , 1 ) [ 1 ]"}
+{"intent": "define the function is_valid_ipv6_address with an argument ip_str.", "snippet": "def is_valid_ipv6_address ( ip_str ) :"}
+{"intent": "from django.core.validators import validate_ipv4_address.", "snippet": "from django . core . validators import validate_ipv4_address"}
+{"intent": "if ':' is not contained in ip_str.", "snippet": "if ':' not in ip_str :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "if count of occurrence of '::' in ip_str is greater than integer 1,", "snippet": "if ip_str . count ( '::' ) > 1 :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "if string ':::' is contained in ip_str,", "snippet": "if ':::' in ip_str :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "if ip_str starts with ':, but it doesnt starts with '::', or if ip_str ends with ':, but it doesnt ends with '::',", "snippet": "if ( ( ip_str . startswith ( ':' ) and not ip_str . startswith ( '::' ) ) or  ( ip_str . endswith ( ':' ) and not ip_str . endswith ( '::' ) ) ) :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "if count of occurrence of ':' in ip_str is greater than integer 7,", "snippet": "if ip_str . count ( ':' ) > 7 :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "if '::' is not contained in ip_str and number of occurrences of ':' in ip_str is not equal to integer 7,", "snippet": "if '::' not in ip_str and ip_str . count ( ':' ) != 7 :"}
+{"intent": "if count of occurrence of '.' in ip_str is not equal to integer 3,", "snippet": "if ip_str . count ( '.' ) != 3 :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "call the function _explode_shorthand_ip_string with an argument ip_str, substitute the result for ip_str.", "snippet": "ip_str = _explode_shorthand_ip_string ( ip_str )"}
+{"intent": "split ip_str into parts by ':', for every hextet in the result,", "snippet": "for hextet in ip_str . split ( ':' ) :"}
+{"intent": "if count of occurrence of '.' in ip_str is equal to integer 3,", "snippet": "if hextet . count ( '.' ) == 3 :"}
+{"intent": "split ip_str by ':', if last element of the result is not equal to hextet.", "snippet": "if not ip_str . split ( ':' ) [ - 1 ] == hextet :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "call the function validate_ipv4_address with an argument hextet.", "snippet": "validate_ipv4_address ( hextet )"}
+{"intent": "if ValidationError exception is caught,", "snippet": "except ValidationError :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "if hextet converted to hexadecimal number is smaller than hexadecimal 0, or hextet converted to hexadecimal number is smaller than hexadecimal FFFF,", "snippet": "if int ( hextet , 16 ) < 0x0 or int ( hextet , 16 ) > 0xFFFF :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "if ValueError exception is caught.", "snippet": "except ValueError :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "return boolean True.", "snippet": "return True"}
+{"intent": "define the function _explode_shorthand_ip_string with an argument ip_str.", "snippet": "def _explode_shorthand_ip_string ( ip_str ) :"}
+{"intent": "call the function _is_shorthand_ip with an argument ip_str, if it evaluates to false,", "snippet": "if not _is_shorthand_ip ( ip_str ) :"}
+{"intent": "return ip_str.", "snippet": "return ip_str"}
+{"intent": "new_ip is an empty list,", "snippet": "new_ip = [ ]"}
+{"intent": "split ip_str by '::', substitute it for hextet.", "snippet": "hextet = ip_str . split ( '::' )"}
+{"intent": "split ip_str into parts by ':', if '.' is contained in the last element of the result,", "snippet": "if '.' in ip_str . split ( ':' ) [ - 1 ] :"}
+{"intent": "fill_to is an integer 7.", "snippet": "fill_to = 7"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "fill_to is an integer 8.", "snippet": "fill_to = 8"}
+{"intent": "if length of hextet is greater than integer 1,", "snippet": "if len ( hextet ) > 1 :"}
+{"intent": "split first and second element of hextet into parts by ':', sum their lengths, substitute the result for sep.", "snippet": "sep = len ( hextet [ 0 ] . split ( ':' ) ) + len ( hextet [ 1 ] . split ( ':' ) )"}
+{"intent": "split first element of hextet into parts by ':', append them to new_ip.", "snippet": "new_ip = hextet [ 0 ] . split ( ':' )"}
+{"intent": "for every __ in range of integers from 0 up to sep subtracted from fill_to,", "snippet": "for __ in xrange ( fill_to - sep ) :"}
+{"intent": "append string '0000' to new_ip.", "snippet": "new_ip . append ( '0000' )"}
+{"intent": "split second element of hextet into parts by ':', append them to new_ip.", "snippet": "new_ip += hextet [ 1 ] . split ( ':' )"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "split ip_str into parts by ':', substitute the result for new_ip.", "snippet": "new_ip = ip_str . split ( ':' )"}
+{"intent": "ret_ip is an empty list.", "snippet": "ret_ip = [ ]"}
+{"intent": "for every hextet in new_ip,", "snippet": "for hextet in new_ip :"}
+{"intent": "subtract length of hextet from 4, create a string with previous result number of character '0', append hextet to it,", "snippet": "ret_ip . append ( ( '0' * ( 4 - len ( hextet ) ) + hextet ) . lower ( ) )"}
+{"intent": "convert the result into a lowercase, append it to ret_ip.   join elements of ret_ip into a string separated with ':', return it.", "snippet": "return ':' . join ( ret_ip )"}
+{"intent": "define the function _is_shorthand_ip with an argument ip_str.", "snippet": "def _is_shorthand_ip ( ip_str ) :"}
+{"intent": "if count of occurrence of '::' in ip_str equals integer 1,", "snippet": "if ip_str . count ( '::' ) == 1 :"}
+{"intent": "return boolean True.", "snippet": "return True"}
+{"intent": "split ip_str into parts by ':', for every x in the result, calculate length of x, if any is smaller than integer 4,", "snippet": "if any ( len ( x ) < 4 for x in ip_str . split ( ':' ) ) :"}
+{"intent": "return boolean True.", "snippet": "return True"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "define the function is_iterable with an argument x.", "snippet": "def is_iterable ( x ) :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "create an iterator out of x.", "snippet": "iter ( x )"}
+{"intent": "if TypeError exception is caught,", "snippet": "except TypeError :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "return boolean True.", "snippet": "return True"}
+{"intent": "import module re.", "snippet": "import re"}
+{"intent": "derive the class Tok from the object base class.", "snippet": "class Tok ( object ) :"}
+{"intent": "num is an integer 0.", "snippet": "num = 0"}
+{"intent": "define the method __init__ with 4 arguments: self, name, regex and next set to None.", "snippet": "def __init__ ( self , name , regex , next = None ) :"}
+{"intent": "substitute Tok.num for self.id.", "snippet": "self . id = Tok . num"}
+{"intent": "increment Tok.num with an integer 1.", "snippet": "Tok . num += 1"}
+{"intent": "substitute name for self.name.", "snippet": "self . name = name"}
+{"intent": "substitute regex for self.regex.", "snippet": "self . regex = regex"}
+{"intent": "substitute next for self.next.", "snippet": "self . next = next"}
+{"intent": "define the function literals with 3 arguments: choices, prefix set to an empty string and suffix set to an empty string.", "snippet": "def literals ( choices , prefix = '' , suffix = '' ) :"}
+{"intent": "for every c in choices split into words, concatenate prefix, result of the function re.escape with an argument c and suffix,", "snippet": "return '|' . join ( prefix + re . escape ( c ) + suffix for c in choices . split ( ) )"}
+{"intent": "and join the results into a string, separated with '|' character, return the result.   derive the class Lexer from the object base class.", "snippet": "class Lexer ( object ) :"}
+{"intent": "define the method __init__ with 3 arguments self, states and first.", "snippet": "def __init__ ( self , states , first ) :"}
+{"intent": "self.regexes is an empty dictionary.", "snippet": "self . regexes = \\{ \\}"}
+{"intent": "self.tokens is an empty dictionary.", "snippet": "self . toks = \\{ \\}"}
+{"intent": "call the method states.items, for every state and rules in the result,", "snippet": "for state , rules in states . items ( ) :"}
+{"intent": "parts is an empty list.", "snippet": "parts = [ ]"}
+{"intent": "for every tok in rules,", "snippet": "for tok in rules :"}
+{"intent": "groupid is a string 't%d' formated with tok.id.", "snippet": "groupid = 't%d' % tok . id"}
+{"intent": "substitute tok for value under the groupid key of the self.toks dictionary.", "snippet": "self . toks [ groupid ] = tok"}
+{"intent": "format a string '(?P<%s>%s)' with groupid and tok.regex, append it to the parts.", "snippet": "parts . append ( '(?P<%s>%s)' % ( groupid , tok . regex ) )"}
+{"intent": "call the function re.compile with 2 arguments: elements of parts joined into a string, separated with '|',", "snippet": "self . regexes [ state ] = re . compile ( '|' . join ( parts ) , re . MULTILINE | re . VERBOSE )"}
+{"intent": "and result of bitwise OR performed on 2 operands: re.MULTILINE and re.VERBOSE,   substitute the result for value under the state key of the self.regexes dictionary.   substitute first for self.state.", "snippet": "self . state = first"}
+{"intent": "define the method lex with 2 arguments self and text.", "snippet": "def lex ( self , text ) :"}
+{"intent": "substitute length of text for end.", "snippet": "end = len ( text )"}
+{"intent": "substitute self.state for state.", "snippet": "state = self . state"}
+{"intent": "substitute self.regexes for regexes.", "snippet": "regexes = self . regexes"}
+{"intent": "substitute self.toks for toks.", "snippet": "toks = self . toks"}
+{"intent": "start is an integer 0.", "snippet": "start = 0"}
+{"intent": "while start is lesser than end.", "snippet": "while start < end :"}
+{"intent": "get the value under the state key of the regexes dictionary, call the method finditer on the result with 2 arguments: text and start,", "snippet": "for match in regexes [ state ] . finditer ( text , start ) :"}
+{"intent": "for every match in the result,   substitute match.lastgroup for name.", "snippet": "name = match . lastgroup"}
+{"intent": "substitute value under the name key of the toks dictionary for tok.", "snippet": "tok = toks [ name ]"}
+{"intent": "call the method match.group with an arugument name, substitute the result for toktext.", "snippet": "toktext = match . group ( name )"}
+{"intent": "increment start by length of toktext.", "snippet": "start += len ( toktext )"}
+{"intent": "yield a tuple with 2 elements: tok.name and toktext.", "snippet": "yield ( tok . name , toktext )"}
+{"intent": "if tok.next is true,", "snippet": "if tok . next :"}
+{"intent": "substitute tok.next for state.", "snippet": "state = tok . next"}
+{"intent": "break from the loop execution.", "snippet": "break"}
+{"intent": "substitute state for self.state.", "snippet": "self . state = state"}
+{"intent": "derive the class JsLexer from the Lexer base class.", "snippet": "class JsLexer ( Lexer ) :"}
+{"intent": "both_before is a list containing 14 elements, all of them are instances of Tok class, created with 2 arguments, a string and a raw string.", "snippet": "both_before = [  Tok ( 'comment' , r'/\\*(.|\\n)*?\\*/' ) ,  Tok ( 'linecomment' , r'//.*?$' ) ,  Tok ( 'ws' , r'\\s+' ) ,  Tok ( 'keyword' , literals ( '''                            break case catch class const continue debugger                            default delete do else enum export extends                            finally for function if import in instanceof                            new return super switch this throw try typeof                            var void while with                            ''' , suffix = r'\\b' ) , next = 'reg' ) ,  Tok ( 'reserved' , literals ( 'null true false' , suffix = r'\\b' ) , next = 'div' ) ,  Tok ( 'id' , r'''                   ([a-zA-Z_$   ]|\\\\u[0-9a-fA-Z]\\{4\\})   # first char                   ([a-zA-Z_$0-9]|\\\\u[0-9a-fA-F]\\{4\\})*  # rest chars                   ''' , next = 'div' ) ,  Tok ( 'hnum' , r'0[xX][0-9a-fA-F]+' , next = 'div' ) ,  Tok ( 'onum' , r'0[0-7]+' ) ,  Tok ( 'dnum' , r'''                     (   (0|[1-9][0-9]*)     # DecimalIntegerLiteral                         \\.                  # dot                         [0-9]*              # DecimalDigits-opt                         ([eE][-+]?[0-9]+)?  # ExponentPart-opt                     |                         \\.                  # dot                         [0-9]+              # DecimalDigits                         ([eE][-+]?[0-9]+)?  # ExponentPart-opt                     |                         (0|[1-9][0-9]*)     # DecimalIntegerLiteral                         ([eE][-+]?[0-9]+)?  # ExponentPart-opt                     )                     ''' , next = 'div' ) ,  Tok ( 'punct' , literals ( '''                          >>>= === !== >>> <<= >>= <= >= == != << >> &&                          || += -= *= %= &= |= ^=                          ''' ) , next = 'reg' ) ,  Tok ( 'punct' , literals ( '++ -- ) ]' ) , next = 'div' ) ,  Tok ( 'punct' , literals ( '\\{ \\} ( [ . ; , < > + - * % & | ^ ! ~ ? : =' ) , next = 'reg' ) ,  Tok ( 'string' , r''([^'\\\\]|(\\\\(.|\\n)))*?'' , next = 'div' ) ,  Tok ( 'string' , r''([^'\\\\]|(\\\\(.|\\n)))*?'' , next = 'div' ) ,  ]"}
+{"intent": "both_after is an list with an element instance of Tok class, created with 2 arguments: string 'other' and raw string '.'.", "snippet": "both_after = [  Tok ( 'other' , r'.' ) ,  ]"}
+{"intent": "states is a dictionary with 2 arguments: appended list with an element instance of a class Tok, created with 3 arguments: 'punct',", "snippet": "states = \\{   'div' : both_before + [  Tok ( 'punct' , literals ( '/= /' ) , next = 'reg' ) ,  ] + both_after ,    'reg' : both_before + [  Tok ( 'regex' ,  r'''                     /                       # opening slash                     # First character is..                     (   [^*\\\\/[]            # anything but * \\ / or [                     |   \\\\.                 # or an escape sequence                     |   \\[                  # or a class, which has                             (   [^\\]\\\\]     #   anything but \\ or ]                             |   \\\\.         #   or an escape sequence                             )*              #   many times                         \\]                     )                     # Following characters are same, except for excluding a star                     (   [^\\\\/[]             # anything but \\ / or [                     |   \\\\.                 # or an escape sequence                     |   \\[                  # or a class, which has                             (   [^\\]\\\\]     #   anything but \\ or ]                             |   \\\\.         #   or an escape sequence                             )*              #   many times                         \\]                     )*                      # many times                     /                       # closing slash                     [a-zA-Z0-9]*            # trailing flags                 ''' , next = 'div' ) ,  ] + both_after ,  \\}"}
+{"intent": "result of the function literals called with an argument string '/= /' and next as a string 'reg', to the both_before,   appended both_after to the previous result, for 'div' and appended list with an element instance of a class Tok,   created with 3 arguments: string 'regex',   raw string '/([^*\\\\/[]|\\\\.|\\[(   [^\\]\\\\]|   \\\\.)*\\])(   [^\\\\/[]|   \\\\.|   \\[(   [^\\]\\\\]|   \\\\.)*\\])*/[a-zA-Z0-9]*',   and next as a string 'div', to the both_before, appended both_after to the previous result for 'div'.   define the method __init__ with an argument self.", "snippet": "def __init__ ( self ) :"}
+{"intent": "call the method __init__ with 2 arguments: self.states and string 'reg' from the base class of the class JsLexer.", "snippet": "super ( JsLexer , self ) . __init__ ( self . states , 'reg' )"}
+{"intent": "define the function prepare_js_for_gettext with an argument js.", "snippet": "def prepare_js_for_gettext ( js ) :"}
+{"intent": "define the function escape_quotes with an argument m.", "snippet": "def escape_quotes ( m ) :"}
+{"intent": "call the method m.group with an argument integer 0, substitute the result for s.", "snippet": "s = m . group ( 0 )"}
+{"intent": "if s equals a string ''',", "snippet": "if s == ''' :"}
+{"intent": "return an raw string '\\''.", "snippet": "return r'\\''"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "return s.", "snippet": "return s"}
+{"intent": "lexer is an instance of JsLexer class.", "snippet": "lexer = JsLexer ( )"}
+{"intent": "c is an empty list.", "snippet": "c = [ ]"}
+{"intent": "call the method lexer.lex with an arguments js, for every name and tok in the result,", "snippet": "for name , tok in lexer . lex ( js ) :"}
+{"intent": "if name equals a string 'regex',", "snippet": "if name == 'regex' :"}
+{"intent": "tok is a string ''REGEX'',", "snippet": "tok = ''REGEX''"}
+{"intent": "otherwise if name starts with a string 'string',", "snippet": "elif name == 'string' :"}
+{"intent": "if tok starts with ''',", "snippet": "if tok . startswith ( ''' ) :"}
+{"intent": "call the function re.sub with 3 arguments: raw string '\\\\.|.', escape_quotes and tok without the first and last element,", "snippet": "guts = re . sub ( r'\\\\.|.' , escape_quotes , tok [ 1 : - 1 ] )"}
+{"intent": "substitute the result for guts.   concatenate string ''', guts and string ''', substitute the result for tok.", "snippet": "tok = ''' + guts + '''"}
+{"intent": "otherwise if name equals a string 'id'.", "snippet": "elif name == 'id' :"}
+{"intent": "replace every occurrence of '\\\\' in tok with 'U', substitute the result for tok.", "snippet": "tok = tok . replace ( '\\\\' , 'U' )"}
+{"intent": "append tok to c.", "snippet": "c . append ( tok )"}
+{"intent": "join elements of c into a string, return it.", "snippet": "return '' . join ( c )"}
+{"intent": "import module logging.", "snippet": "import logging"}
+{"intent": "import module sys.", "snippet": "import sys"}
+{"intent": "import module warnings.", "snippet": "import warnings"}
+{"intent": "from django.conf import settings into default name space.", "snippet": "from django . conf import settings"}
+{"intent": "from django.core import mail into default name space.", "snippet": "from django . core import mail"}
+{"intent": "from django.core.mail import get_connection into default name space.", "snippet": "from django . core . mail import get_connection"}
+{"intent": "from django.utils.deprecation import RemovedInNextVersionWarning into default name space.", "snippet": "from django . utils . deprecation import RemovedInNextVersionWarning"}
+{"intent": "from django.utils.module_loading import import_string into default name space.", "snippet": "from django . utils . module_loading import import_string"}
+{"intent": "from django.views.debug import ExceptionReporter and get_exception_reporter_filter into default name space.", "snippet": "from django . views . debug import ExceptionReporter , get_exception_reporter_filter"}
+{"intent": "from logging import NullHandler.", "snippet": "from logging import NullHandler"}
+{"intent": "from logging.config import dictConfig.", "snippet": "from logging . config import dictConfig"}
+{"intent": "substitute logging.getLogger for getLogger.", "snippet": "getLogger = logging . getLogger"}
+{"intent": "DEFAULT_LOGGING is a dictionary with 5 initial entries: 1 for 'version', False for 'disable_existing_loggers',", "snippet": "DEFAULT_LOGGING = \\{  'version' : 1 ,  'disable_existing_loggers' : False ,  'filters' : \\{  'require_debug_false' : \\{  '()' : 'django.utils.log.RequireDebugFalse' ,  \\} ,  'require_debug_true' : \\{  '()' : 'django.utils.log.RequireDebugTrue' ,  \\} ,  \\} ,  'handlers' : \\{  'console' : \\{  'level' : 'INFO' ,  'filters' : [ 'require_debug_true' ] ,  'class' : 'logging.StreamHandler' ,  \\} ,  'null' : \\{  'class' : 'logging.NullHandler' ,  \\} ,  'mail_admins' : \\{  'level' : 'ERROR' ,  'filters' : [ 'require_debug_false' ] ,  'class' : 'django.utils.log.AdminEmailHandler'  \\}  \\} ,  'loggers' : \\{  'django' : \\{  'handlers' : [ 'console' ] ,  \\} ,  'django.request' : \\{  'handlers' : [ 'mail_admins' ] ,  'level' : 'ERROR' ,  'propagate' : False ,  \\} ,  'django.security' : \\{  'handlers' : [ 'mail_admins' ] ,  'level' : 'ERROR' ,  'propagate' : False ,  \\} ,  'py.warnings' : \\{  'handlers' : [ 'console' ] ,  \\} ,  \\}  \\}"}
+{"intent": "and 3 additional pairs of dictionaries for string.   define the function configure_logging with 2 arguments: logging_config and logging_settings.", "snippet": "def configure_logging ( logging_config , logging_settings ) :"}
+{"intent": "if sys.warnoptions is false,", "snippet": "if not sys . warnoptions :"}
+{"intent": "call the method logging.captureWarnings with an argument boolean True.", "snippet": "logging . captureWarnings ( True )"}
+{"intent": "call the function warnings.simplefilter with 2 arguments: string 'default' and RemovedInNextVersionWarning.", "snippet": "warnings . simplefilter ( 'default' , RemovedInNextVersionWarning )"}
+{"intent": "if logging_config is true,", "snippet": "if logging_config :"}
+{"intent": "call the function import_string with an argument logging_config, substitute the result for logging_config_func.", "snippet": "logging_config_func = import_string ( logging_config )"}
+{"intent": "call the function logging_config_func with an argument DEFAULT_LOGGING.", "snippet": "logging_config_func ( DEFAULT_LOGGING )"}
+{"intent": "if logging_settings is true,", "snippet": "if logging_settings :"}
+{"intent": "call the function logging_config_func with an argument logging_settings.", "snippet": "logging_config_func ( logging_settings )"}
+{"intent": "derive the class AdminEmailHandler from logging.Handler base class.", "snippet": "class AdminEmailHandler ( logging . Handler ) :"}
+{"intent": "define the method __init__ with 3 arguments: self, include_html set to boolean False and email_backend set to None.", "snippet": "def __init__ ( self , include_html = False , email_backend = None ) :"}
+{"intent": "call the method logging.Handler.__init__ with an argument self.", "snippet": "logging . Handler . __init__ ( self )"}
+{"intent": "substitute include_html for self.include_html.", "snippet": "self . include_html = include_html"}
+{"intent": "substitute email_backend for self.email_backend.", "snippet": "self . email_backend = email_backend"}
+{"intent": "define the method emit with 2 arguments: self and record.", "snippet": "def emit ( self , record ) :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "substitute record.request for request.", "snippet": "request = record . request"}
+{"intent": "subject is an string '%s (%s IP): %s', formated with record.levelname, string 'internal' if value under the 'REMOTE_ADDR' key,", "snippet": "subject = '%s (%s IP): %s' % (  record . levelname ,  ( 'internal' if request . META . get ( 'REMOTE_ADDR' ) in settings . INTERNAL_IPS  else 'EXTERNAL' ) ,  record . getMessage ( )  )"}
+{"intent": "of the request.META dictionary is contained in settings.INTERNAL_IPS, otherwise use string 'EXTERNAL',   and result of the method record.getMessage.   call the function get_exception_reporter_filter with an argument request, substitute the result for filter.", "snippet": "filter = get_exception_reporter_filter ( request )"}
+{"intent": "call the method filter.get_request_repr with an argument request, format string '\\n\\{0\\}' with the result, substitute the result for request_repr.", "snippet": "request_repr = '\\n\\{0\\}' . format ( filter . get_request_repr ( request ) )"}
+{"intent": "if Exception exception is caught,", "snippet": "except Exception :"}
+{"intent": "subject is an string '%s: %s' formated with record.levelname and result of the method record.getMessage, respectively.", "snippet": "subject = '%s: %s' % (  record . levelname ,  record . getMessage ( )  )"}
+{"intent": "request is None.", "snippet": "request = None"}
+{"intent": "request_repr is a string 'unavailable'.", "snippet": "request_repr = 'unavailable'"}
+{"intent": "call the function self.format_subject with an argument subject, substitute the result for subject.", "snippet": "subject = self . format_subject ( subject )"}
+{"intent": "if record.exc_info is true,", "snippet": "if record . exc_info :"}
+{"intent": "substitute record.exc_info for exc_info.", "snippet": "exc_info = record . exc_info"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "exc_info is an tuple with 3 elements: None, result of method record.getMessage and None.", "snippet": "exc_info = ( None , record . getMessage ( ) , None )"}
+{"intent": "message is an string '%s\\n\\nRequest repr(): %s'  formated with the result of the metod self.format with an argument record,", "snippet": "message = '%s\\n\\nRequest repr(): %s' % ( self . format ( record ) , request_repr )"}
+{"intent": "and request_repr, respectively.   reporter is an instance of ExceptionReporter class, created with 3 arguments: request, is_email as boolean True,", "snippet": "reporter = ExceptionReporter ( request , is_email = True , * exc_info )"}
+{"intent": "unpacked list exc_info.   if self.include_html is true, call the method reporter.get_traceback_html and substitute the result for html_message,", "snippet": "html_message = reporter . get_traceback_html ( ) if self . include_html else None"}
+{"intent": "otherwise html_message is None.   call the method mail.mail_admins with 5 arguments: subject, message, fail_silently as boolean True, tml_message as html_message,", "snippet": "mail . mail_admins ( subject , message , fail_silently = True ,  html_message = html_message ,  connection = self . connection ( ) )"}
+{"intent": "and connection as the result of the method self.connection.   define the connection with an argument self.", "snippet": "def connection ( self ) :"}
+{"intent": "call the function get_connection with 2 arguments: backend set to self.email_backend and fail_silently set to boolean True.", "snippet": "return get_connection ( backend = self . email_backend , fail_silently = True )"}
+{"intent": "define the method format_subject with 2 arguments: self and subject.", "snippet": "def format_subject ( self , subject ) :"}
+{"intent": "replace every occurrence of '\\n' in subject with '\\\\n' and replace every occurrence of '\\r' in subject with '\\\\r',", "snippet": "formatted_subject = subject . replace ( '\\n' , '\\\\n' ) . replace ( '\\r' , '\\\\r' )"}
+{"intent": "substitute the result for formatted_subject.   return first 989 elements of formatted_subject.", "snippet": "return formatted_subject [ : 989 ]"}
+{"intent": "derive the class CallbackFilter from logging.Filter base class.", "snippet": "class CallbackFilter ( logging . Filter ) :"}
+{"intent": "define the method __init__ with 2 arguments: self and callback.", "snippet": "def __init__ ( self , callback ) :"}
+{"intent": "substitute callback for self.callback.", "snippet": "self . callback = callback"}
+{"intent": "define the method filter with 2 arguments: self and record.", "snippet": "def filter ( self , record ) :"}
+{"intent": "call the method self.callback with an argument record, if the result evaluates to true,", "snippet": "if self . callback ( record ) :"}
+{"intent": "return integer 1.", "snippet": "return 1"}
+{"intent": "return integer 0.", "snippet": "return 0"}
+{"intent": "derive the class RequireDebugFalse from logging.Filter base class.", "snippet": "class RequireDebugFalse ( logging . Filter ) :"}
+{"intent": "define the method filter with 2 arguments: self and record.", "snippet": "def filter ( self , record ) :"}
+{"intent": "if settings.DEBUG is true, return boolean False, otherwise return boolean True.", "snippet": "return not settings . DEBUG"}
+{"intent": "derive the class RequireDebugTrue from logging.Filter base class.", "snippet": "class RequireDebugTrue ( logging . Filter ) :"}
+{"intent": "define the method filter with 2 arguments: self and record.", "snippet": "def filter ( self , record ) :"}
+{"intent": "return settings.DEBUG.", "snippet": "return settings . DEBUG"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "from functools import lru_cache.", "snippet": "from functools import lru_cache"}
+{"intent": "if ImportError exception is caught.", "snippet": "except ImportError :"}
+{"intent": "from collections import namedtuple.", "snippet": "from collections import namedtuple"}
+{"intent": "from functools import update_wrapper.", "snippet": "from functools import update_wrapper"}
+{"intent": "from threading import RLock.", "snippet": "from threading import RLock"}
+{"intent": "_CacheInfo is an instance of namedtuple class created with 2 arguments: string 'CacheInfo' and a list with 4 elements: string 'hits',", "snippet": "_CacheInfo = namedtuple ( 'CacheInfo' , [ 'hits' , 'misses' , 'maxsize' , 'currsize' ] )"}
+{"intent": "'misses', 'maxsize' and 'currsize'.   derive class _HashedSeq from list base class.", "snippet": "class _HashedSeq ( list ) :"}
+{"intent": "__slots__ is a string 'hashvalue'.", "snippet": "__slots__ = 'hashvalue'"}
+{"intent": "define the method __init__ with 3 arguments: self, tup and hash set to hash.", "snippet": "def __init__ ( self , tup , hash = hash ) :"}
+{"intent": "substitute tup for elements of self.", "snippet": "self [ : ] = tup"}
+{"intent": "get the hash value of the tup, substitute it for self.hashvalue.", "snippet": "self . hashvalue = hash ( tup )"}
+{"intent": "define the method __hash__ with an argument self.", "snippet": "def __hash__ ( self ) :"}
+{"intent": "return self.hashvalue.", "snippet": "return self . hashvalue"}
+{"intent": "define the function _make_key with 9 arguments: args, kwds, typed, kwd_mark as a tuple with an element result of the function object,", "snippet": "def _make_key ( args , kwds , typed ,  kwd_mark = ( object ( ) , ) ,  fasttypes = \\{ int , str , frozenset , type ( None ) \\} ,  sorted = sorted , tuple = tuple , type = type , len = len ) :"}
+{"intent": "substitute args for key.", "snippet": "key = args"}
+{"intent": "if kwds is true,", "snippet": "if kwds :"}
+{"intent": "sort elements of kwds, substitute the result for sorted_items.", "snippet": "sorted_items = sorted ( kwds . items ( ) )"}
+{"intent": "increment key by kwd_mark.", "snippet": "key += kwd_mark"}
+{"intent": "for every item in sorted_items,", "snippet": "for item in sorted_items :"}
+{"intent": "increment key by item.", "snippet": "key += item"}
+{"intent": "if typed is true,", "snippet": "if typed :"}
+{"intent": "create a tuple out of types of v, for every v in args, extend key tuple with the result.", "snippet": "key += tuple ( type ( v ) for v in args )"}
+{"intent": "if kwds is true,", "snippet": "if kwds :"}
+{"intent": "create a tuple out of types of v, for every k and v in sorted_items, extend key tuple with the result.", "snippet": "key += tuple ( type ( v ) for k , v in sorted_items )"}
+{"intent": "otherwise if length of key equals integer 1 and type of first element of key is contained in fasttypes,", "snippet": "elif len ( key ) == 1 and type ( key [ 0 ] ) in fasttypes :"}
+{"intent": "return first element of key.", "snippet": "return key [ 0 ]"}
+{"intent": "return instance of _HashedSeq class, created with an argument key.", "snippet": "return _HashedSeq ( key )"}
+{"intent": "define the function lru_cache with 2 arguments maxsize set to integer 100 and typed set to boolean False.", "snippet": "def lru_cache ( maxsize = 100 , typed = False ) :"}
+{"intent": "define the function decorating_function with an argument user_function.", "snippet": "def decorating_function ( user_function ) :"}
+{"intent": "cache is an empty dictionary.", "snippet": "cache = dict ( )"}
+{"intent": "stats is an list with 2 elements: 2 integers 0.", "snippet": "stats = [ 0 , 0 ]"}
+{"intent": "HITS and MISSES are integer 0 and 1, respectively.", "snippet": "HITS , MISSES = 0 , 1"}
+{"intent": "substitute _make_key for make_key.", "snippet": "make_key = _make_key"}
+{"intent": "substitute cache.get for cache_get.", "snippet": "cache_get = cache . get"}
+{"intent": "substitute len for _len.", "snippet": "_len = len"}
+{"intent": "lock is an instance of RLock class.", "snippet": "lock = RLock ( )"}
+{"intent": "root is an empty list.", "snippet": "root = [ ]"}
+{"intent": "root is a list with elements: root, root, None and None.", "snippet": "root [ : ] = [ root , root , None , None ]"}
+{"intent": "nonlocal_root is an list with an element root.", "snippet": "nonlocal_root = [ root ]"}
+{"intent": "substitute integers 0, 1, 2 and 3 for PREV, NEXT, KEY and RESULT, respectivley.", "snippet": "PREV , NEXT , KEY , RESULT = 0 , 1 , 2 , 3"}
+{"intent": "if maxsize equals integer 0,", "snippet": "if maxsize == 0 :"}
+{"intent": "define the function wrapper with 2 arguments: unpacked list args and unpacked dictionary kwds.", "snippet": "def wrapper ( * args , ** kwds ) :"}
+{"intent": "call the function user_function with 2 arguments: unpacked list args and unpacked dictionary kwds, substitute the result for result.", "snippet": "result = user_function ( * args , ** kwds )"}
+{"intent": "increment stats dictionary value under the MISSES key by integer 1.", "snippet": "stats [ MISSES ] += 1"}
+{"intent": "return result.", "snippet": "return result"}
+{"intent": "otherwise if maxsize is None,", "snippet": "elif maxsize is None :"}
+{"intent": "define the function wrapper with 2 arguments: unpacked list args and unpacked dictionary kwds.", "snippet": "def wrapper ( * args , ** kwds ) :"}
+{"intent": "call the function make_key with 3 arguments: args, kwds and typed, substitute the result for key.", "snippet": "key = make_key ( args , kwds , typed )"}
+{"intent": "call the function cache_get with 2 arguments: key and root, substitute the result for result.", "snippet": "result = cache_get ( key , root )"}
+{"intent": "if result is not root,", "snippet": "if result is not root :"}
+{"intent": "increment stats dictionary value under the HITS key by integer 1.", "snippet": "stats [ HITS ] += 1"}
+{"intent": "return result.", "snippet": "return result"}
+{"intent": "call the function user_function with 2 arguments unpacked list args and unpacked dictionary kwds, substitute the result for result.", "snippet": "result = user_function ( * args , ** kwds )"}
+{"intent": "substitute result for cache dictionary value under the key key.", "snippet": "cache [ key ] = result"}
+{"intent": "increment stats dictionary value under the MISSES key by integer 1.", "snippet": "stats [ MISSES ] += 1"}
+{"intent": "return result.", "snippet": "return result"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "define the function wrapper with 2 arguments: unpacked list args and unpacked dictionary kwds.", "snippet": "def wrapper ( * args , ** kwds ) :"}
+{"intent": "if kwds is true or typed is true, call the function make_key with 3 arguments: args, kwds and typed, substitute the result for key,", "snippet": "key = make_key ( args , kwds , typed ) if kwds or typed else args"}
+{"intent": "otherwise substitute args for key.   with lock,", "snippet": "with lock :"}
+{"intent": "call the function cache_get with an argument key, substitute the result for link.", "snippet": "link = cache_get ( key )"}
+{"intent": "if link is not None,", "snippet": "if link is not None :"}
+{"intent": "substitute nonlocal_root for a tuple with an element root.", "snippet": "root , = nonlocal_root"}
+{"intent": "substitute link for link_prev, link_next, key and result, respectively.", "snippet": "link_prev , link_next , key , result = link"}
+{"intent": "substitute link_next for value under the NEXT key of the link_prev dictionary.", "snippet": "link_prev [ NEXT ] = link_next"}
+{"intent": "substitute link_prev for value under the PREV key of the link_next dictionary.", "snippet": "link_next [ PREV ] = link_prev"}
+{"intent": "substitute value under the PREV key of the root dictionary for last.", "snippet": "last = root [ PREV ]"}
+{"intent": "substitute link for values under the NEXT key of the last dictionary and PREV key of the root dictionary.", "snippet": "last [ NEXT ] = root [ PREV ] = link"}
+{"intent": "substitute last for value under the PREV key of the link dictionary.", "snippet": "link [ PREV ] = last"}
+{"intent": "substitute root for value under the NEXT key of the link dictionary.", "snippet": "link [ NEXT ] = root"}
+{"intent": "increment stats dictionary value under the HITS key by integer 1.", "snippet": "stats [ HITS ] += 1"}
+{"intent": "return result.", "snippet": "return result"}
+{"intent": "call the function user_function with 2 arguments: unpacked list args and unpacked dictionary kwds, substitute the result for result.", "snippet": "result = user_function ( * args , ** kwds )"}
+{"intent": "with lock,", "snippet": "with lock :"}
+{"intent": "substitute nonlocal_root for tuple root.", "snippet": "root , = nonlocal_root"}
+{"intent": "if key is contained in cache,", "snippet": "if key in cache :"}
+{"intent": "do nothing.", "snippet": "pass"}
+{"intent": "otherwise if result of the call to the function _len with an argument cache is greater than or equal to maxsize,", "snippet": "elif _len ( cache ) >= maxsize :"}
+{"intent": "substitute root for oldroot.", "snippet": "oldroot = root"}
+{"intent": "substitute key for value under the KEY key of the oldroot dictionary.", "snippet": "oldroot [ KEY ] = key"}
+{"intent": "substitute result for value under the RESULT key of the oldroot dictionary.", "snippet": "oldroot [ RESULT ] = result"}
+{"intent": "substitute value under the NEXT key of the oldroot dictionary for root and first element of nonlocal_root.", "snippet": "root = nonlocal_root [ 0 ] = oldroot [ NEXT ]"}
+{"intent": "substitute value under the KEY key of the root dictionary for oldkey.", "snippet": "oldkey = root [ KEY ]"}
+{"intent": "substitute value under the RESULT key of the root dictionary for oldvalue.", "snippet": "oldvalue = root [ RESULT ]"}
+{"intent": "root dictionary values under the KEY and RESULT keys are both None.", "snippet": "root [ KEY ] = root [ RESULT ] = None"}
+{"intent": "delete entry under the oldkey key of the cache dictionary.", "snippet": "del cache [ oldkey ]"}
+{"intent": "substitute oldroot for value under the key key of the cache dictionary.", "snippet": "cache [ key ] = oldroot"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "substitute value under the PREV key of the root dictionary for last.", "snippet": "last = root [ PREV ]"}
+{"intent": "link is a list with 4 elements: last, root, key and result.", "snippet": "link = [ last , root , key , result ]"}
+{"intent": "substitute link for value under the NEXT key of the last dictionary, for value under the PREV key of the root dictionary,", "snippet": "last [ NEXT ] = root [ PREV ] = cache [ key ] = link"}
+{"intent": "for value under the key key of the cache dictionary.   increment stats dictionary value under the MISSES key by integer 1.", "snippet": "stats [ MISSES ] += 1"}
+{"intent": "return result.", "snippet": "return result"}
+{"intent": "define the function cache_info.", "snippet": "def cache_info ( ) :"}
+{"intent": "with lock,", "snippet": "with lock :"}
+{"intent": "return an instance of _CacheInfo class, created with 4 arguments: value under the HITS key of the stats dictionary,", "snippet": "return _CacheInfo ( stats [ HITS ] , stats [ MISSES ] , maxsize , len ( cache ) )"}
+{"intent": "value under the MISSES key of the stats dictionary, maxsize and length of cache.   define the function cache_clear.", "snippet": "def cache_clear ( ) :"}
+{"intent": "with lock,", "snippet": "with lock :"}
+{"intent": "call the method cache.clear.", "snippet": "cache . clear ( )"}
+{"intent": "substitute first element of nonlocal_root for root.", "snippet": "root = nonlocal_root [ 0 ]"}
+{"intent": "root is an list with 4 elements: root, root, None and None.", "snippet": "root [ : ] = [ root , root , None , None ]"}
+{"intent": "stats is a list with 2 elements: 2 integers 0.", "snippet": "stats [ : ] = [ 0 , 0 ]"}
+{"intent": "substitute user_function for wrapper.__wrapped__.", "snippet": "wrapper . __wrapped__ = user_function"}
+{"intent": "substitute cache_info for wrapper.cache_info.", "snippet": "wrapper . cache_info = cache_info"}
+{"intent": "substitute cache_clear for wrapper.cache_clear.", "snippet": "wrapper . cache_clear = cache_clear"}
+{"intent": "call the function update_wrapper with 2 arguments: wrapper and user_function, return the result.", "snippet": "return update_wrapper ( wrapper , user_function )"}
+{"intent": "return decorating_function.", "snippet": "return decorating_function"}
+{"intent": "from __future__ import absolute_import into default name space.", "snippet": "from __future__ import absolute_import"}
+{"intent": "import module copy.", "snippet": "import copy"}
+{"intent": "from importlib import import_module into default name space.", "snippet": "from importlib import import_module"}
+{"intent": "import module os.", "snippet": "import os"}
+{"intent": "import module sys.", "snippet": "import sys"}
+{"intent": "import module warnings.", "snippet": "import warnings"}
+{"intent": "from django.core.exceptions import ImproperlyConfigured into default name space.", "snippet": "from django . core . exceptions import ImproperlyConfigured"}
+{"intent": "from django.utils import six into default name space.", "snippet": "from django . utils import six"}
+{"intent": "from django.utils.deprecation import RemovedInDjango19Warning into default name space.", "snippet": "from django . utils . deprecation import RemovedInDjango19Warning"}
+{"intent": "define the function import_string with an argument dotted_path.", "snippet": "def import_string ( dotted_path ) :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "split dotted_path into two parts from the right at the '.' character, assign the result to module_path and class_name, respectively.", "snippet": "module_path , class_name = dotted_path . rsplit ( '.' , 1 )"}
+{"intent": "if ValueError exception is caught,", "snippet": "except ValueError :"}
+{"intent": "msg is a string '%s doesn't look like a module path' formated with dotted_path.", "snippet": "msg = '%s doesn't look like a module path' % dotted_path"}
+{"intent": "call the function six.reraise with 3 arguments: ImportError, instance of ImportError class created with an argument msg,", "snippet": "six . reraise ( ImportError , ImportError ( msg ) , sys . exc_info ( ) [ 2 ] )"}
+{"intent": "and third element of result of the function sys.exc_info.   call the function import_module with an argument module_path, substitute the result for module.", "snippet": "module = import_module ( module_path )"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "get attribute class_name form the module object, return it.", "snippet": "return getattr ( module , class_name )"}
+{"intent": "if AttributeError exception is caught,", "snippet": "except AttributeError :"}
+{"intent": "msg is a string 'Module '%s' does not define a '%s' attribute/class' formated with dotted_path and class_name, respectively.", "snippet": "msg = 'Module '%s' does not define a '%s' attribute/class' % (  dotted_path , class_name )"}
+{"intent": "call the function six.reraise with 3 arguments: ImportError, instance of ImportError class created with an argument msg,", "snippet": "six . reraise ( ImportError , ImportError ( msg ) , sys . exc_info ( ) [ 2 ] )"}
+{"intent": "and third element of result of the function sys.exc_info.   define the function import_by_path with 2 arguments dotted_path and error_prefix set to an empty string..", "snippet": "def import_by_path ( dotted_path , error_prefix = '' ) :"}
+{"intent": "call the function warnings.warn with 3 arguments: string 'import_by_path() has been deprecated. Use import_string() instead.',", "snippet": "warnings . warn (  'import_by_path() has been deprecated. Use import_string() instead.' ,  RemovedInDjango19Warning , stacklevel = 2 )"}
+{"intent": "RemovedInDjango19Warning and stacklevel as integer 2.   try,", "snippet": "try :"}
+{"intent": "call the function import_string with an argument dotted_path, substitute the result for attr.", "snippet": "attr = import_string ( dotted_path )"}
+{"intent": "if ImportError, renamed to e, exception is caught,", "snippet": "except ImportError as e :"}
+{"intent": "msg is a string '%sError importing module %s: '%s'', where '%s' is replaced with error_prefix, dotted_path and e, respectively.", "snippet": "msg = '%sError importing module %s: '%s'' % (  error_prefix , dotted_path , e )"}
+{"intent": "call the function six.reraise with 3 arguments: ImproperlyConfigured, instance of ImproperlyConfigured class created with msg,", "snippet": "six . reraise ( ImproperlyConfigured , ImproperlyConfigured ( msg ) ,  sys . exc_info ( ) [ 2 ] )"}
+{"intent": "and third element of the function sys.exc_info result.   return attr.", "snippet": "return attr"}
+{"intent": "define the function autodiscover_modules with 2 arguments unpacked list args and unpacked dictionary kwargs.", "snippet": "def autodiscover_modules ( * args , ** kwargs ) :"}
+{"intent": "from django.apps import apps.", "snippet": "from django . apps import apps"}
+{"intent": "get value under the 'register_to' key of the kwargs dictionary, substitute it for register_to.", "snippet": "register_to = kwargs . get ( 'register_to' )"}
+{"intent": "call the method apps.get_app_configs, for every app_config in the result,", "snippet": "for app_config in apps . get_app_configs ( ) :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "if register_to is true,", "snippet": "if register_to :"}
+{"intent": "call the method copy.copy with an argument register_to._registry, substitute the result for before_import_registry.", "snippet": "before_import_registry = copy . copy ( register_to . _registry )"}
+{"intent": "for every module_to_search in args,", "snippet": "for module_to_search in args :"}
+{"intent": "call the function import_module with an argument string '%s.%s', where '%s' is replaced with app_config.name and module_to_search.", "snippet": "import_module ( '%s.%s' % ( app_config . name , module_to_search ) )"}
+{"intent": "is exception is caught,", "snippet": "except :"}
+{"intent": "if register_to is true,", "snippet": "if register_to :"}
+{"intent": "substitute before_import_registry for register_to._registry.", "snippet": "register_to . _registry = before_import_registry"}
+{"intent": "if call to the function module_has_submodule with 2 arguments: app_config.module and module_to_search evaluates to true,", "snippet": "if module_has_submodule ( app_config . module , module_to_search ) :"}
+{"intent": "raise an exception,", "snippet": "raise"}
+{"intent": "if first and second element of sys.version_info are both equal to integer 3,", "snippet": "if sys . version_info [ : 2 ] >= ( 3 , 3 ) :"}
+{"intent": "if first and second element of sys.version_info are equal to integers 3 and 4, respectively,", "snippet": "if sys . version_info [ : 2 ] >= ( 3 , 4 ) :"}
+{"intent": "from importlib.util import find_spec as importlib_find.", "snippet": "from importlib . util import find_spec as importlib_find"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "from importlib import find_loader as importlib_find.", "snippet": "from importlib import find_loader as importlib_find"}
+{"intent": "define the function module_has_submodule with 2 arguments: package and module_name.", "snippet": "def module_has_submodule ( package , module_name ) :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "substitute package.__name__ for package_name.", "snippet": "package_name = package . __name__"}
+{"intent": "substitute package.__path__ for package_path.", "snippet": "package_path = package . __path__"}
+{"intent": "if AttributeError exception is caught,", "snippet": "except AttributeError :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "concatenate package_name, string '.' and module_name, substitute it for full_module_name.", "snippet": "full_module_name = package_name + '.' + module_name"}
+{"intent": "call the function importlib_find with 2 arguments: full_module_name and package_path, if the result is not None, return boolean True,", "snippet": "return importlib_find ( full_module_name , package_path ) is not None"}
+{"intent": "otherwise return boolean False.   if not,", "snippet": "else :"}
+{"intent": "import imp.", "snippet": "import imp"}
+{"intent": "define the function module_has_submodule with 2 arguments: package and module_name.", "snippet": "def module_has_submodule ( package , module_name ) :"}
+{"intent": "join package.__name__ and module_name into a string separated with '.', substitute it for name.", "snippet": "name = '.' . join ( [ package . __name__ , module_name ] )"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "if value under the name key of the sys.modules dictionary is not None, return boolean True, otherwise return boolean False.", "snippet": "return sys . modules [ name ] is not None"}
+{"intent": "if KeyError exception is caught,", "snippet": "except KeyError :"}
+{"intent": "do nothing.", "snippet": "pass"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "substitute package.__path__ for package_path.", "snippet": "package_path = package . __path__"}
+{"intent": "if AttributeError exception is caught,", "snippet": "except AttributeError :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "for every finder in sys.meta_path,", "snippet": "for finder in sys . meta_path :"}
+{"intent": "if call to the method finder.find_module with 2 arguments: name and package_path evaluates to true,", "snippet": "if finder . find_module ( name , package_path ) :"}
+{"intent": "return boolean True.", "snippet": "return True"}
+{"intent": "for every entry in package_path,", "snippet": "for entry in package_path :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "substitute the value under the entry key of the sys.path_importer_cache dictionary for finder.", "snippet": "finder = sys . path_importer_cache [ entry ]"}
+{"intent": "if finder is None,", "snippet": "if finder is None :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "call the method imp.find_module with 2 arguments: module_name and list containing element entry, assign the result to file_, _,", "snippet": "file_ , _ , _ = imp . find_module ( module_name , [ entry ] )"}
+{"intent": "and _, respectively.   if file_ is true,", "snippet": "if file_ :"}
+{"intent": "close file_ file descriptor.", "snippet": "file_ . close ( )"}
+{"intent": "return boolean True.", "snippet": "return True"}
+{"intent": "if ImportError exception is caught,", "snippet": "except ImportError :"}
+{"intent": "skip this loop iteration,", "snippet": "continue"}
+{"intent": "otherwise if call to the method finder.find_module with an argument name evaluates to true,", "snippet": "elif finder . find_module ( name ) :"}
+{"intent": "return boolean True.", "snippet": "return True"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "skip this loop iteration,", "snippet": "continue"}
+{"intent": "if KeyError exception is caught,", "snippet": "except KeyError :"}
+{"intent": "for every hook in sys.path_hooks,", "snippet": "for hook in sys . path_hooks :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "call the function hook with an argument entry, substitute the result for finder.", "snippet": "finder = hook ( entry )"}
+{"intent": "if call to the method finder.find_module with an argument name evaluates to true,", "snippet": "if finder . find_module ( name ) :"}
+{"intent": "return boolean True.", "snippet": "return True"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "break from the loop execution,", "snippet": "break"}
+{"intent": "if ImportError exception is caught,", "snippet": "except ImportError :"}
+{"intent": "skip this loop iteration,", "snippet": "continue"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "if entry is a directory,", "snippet": "if os . path . isdir ( entry ) :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "call the method imp.find_module with 2 arguments: module_name and list containing element entry, assign the result to file_, _,", "snippet": "file_ , _ , _ = imp . find_module ( module_name , [ entry ] )"}
+{"intent": "and _, respectively.   if file_ is true,", "snippet": "if file_ :"}
+{"intent": "close file_ file descriptor.", "snippet": "file_ . close ( )"}
+{"intent": "return boolean True.", "snippet": "return True"}
+{"intent": "if ImportError exception is caught,", "snippet": "except ImportError :"}
+{"intent": "do nothing.", "snippet": "pass"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "from django.conf import settings into default name space.", "snippet": "from django . conf import settings"}
+{"intent": "from django.utils.safestring import mark_safe into default name space.", "snippet": "from django . utils . safestring import mark_safe"}
+{"intent": "from django.utils import six into default name space.", "snippet": "from django . utils import six"}
+{"intent": "define the function format with 6 arguments: number, decimal_sep, decimal_pos set to None, grouping set to integer 0,", "snippet": "def format ( number , decimal_sep , decimal_pos = None , grouping = 0 , thousand_sep = '' ,  force_grouping = False ) :"}
+{"intent": "if settings.USE_L10N is true, substitute settings.USE_THOUSAND_SEPARATOR for use_grouping,", "snippet": "use_grouping = settings . USE_L10N and settings . USE_THOUSAND_SEPARATOR"}
+{"intent": "otherwise substitute settings.USE_L10N for use_grouping.   if use_grouping is true substitute it for use_grouping, otherwise substitute force_grouping for use_grouping.", "snippet": "use_grouping = use_grouping or force_grouping"}
+{"intent": "if use_grouping is true and grouping is greater than integer 0, use_grouping is boolean True, otherwise it is boolean False.", "snippet": "use_grouping = use_grouping and grouping > 0"}
+{"intent": "if number is an integer and use_grouping is false and decimal_pos is false,", "snippet": "if isinstance ( number , int ) and not use_grouping and not decimal_pos :"}
+{"intent": "call the function six.text_type with an argument number, use the result as an argument for the call to the function mark_safe,", "snippet": "return mark_safe ( six . text_type ( number ) )"}
+{"intent": "return the result.   sign is an empty string.", "snippet": "sign = ''"}
+{"intent": "call the function six.text_type with an argument number, substitute the result for str_number.", "snippet": "str_number = six . text_type ( number )"}
+{"intent": "if first element of str_number equals a string '-'.", "snippet": "if str_number [ 0 ] == '-' :"}
+{"intent": "sign is a string '-'.", "snippet": "sign = '-'"}
+{"intent": "remove the first element from str_number.", "snippet": "str_number = str_number [ 1 : ]"}
+{"intent": "if '.' is not contained in str_number,", "snippet": "if '.' in str_number :"}
+{"intent": "split str_number by '.', substitute the result for int_part and dec_part, respectively.", "snippet": "int_part , dec_part = str_number . split ( '.' )"}
+{"intent": "if decimal_pos is not None,", "snippet": "if decimal_pos is not None :"}
+{"intent": "substitute first decimal_pos elements of dec_part for dec_part.", "snippet": "dec_part = dec_part [ : decimal_pos ]"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "substitute str_number and an empty string for int_part and dec_part.", "snippet": "int_part , dec_part = str_number , ''"}
+{"intent": "if decimal_pos is not None", "snippet": "if decimal_pos is not None :"}
+{"intent": "subtract length of dec_part from decimal_pos, multiply the number of character '0' by the result,", "snippet": "dec_part = dec_part + ( '0' * ( decimal_pos - len ( dec_part ) ) )"}
+{"intent": "append the resulting string to dec_part, substitute it for dec_part.   if dec_part is true,", "snippet": "if dec_part :"}
+{"intent": "add decimal_sep and dec_part, substitute the result for dec_part.", "snippet": "dec_part = decimal_sep + dec_part"}
+{"intent": "if use_grouping is true,", "snippet": "if use_grouping :"}
+{"intent": "int_part_gd is an empty string.", "snippet": "int_part_gd = ''"}
+{"intent": "for every cnt and digit in enumerated list int_part with reversed ordering of elements,", "snippet": "for cnt , digit in enumerate ( int_part [ : : - 1 ] ) :"}
+{"intent": "if cnt is true and remained of dividing cnt with grouping is zero,", "snippet": "if cnt and not cnt % grouping :"}
+{"intent": "increment int_part_gd by thousand_sep.", "snippet": "int_part_gd += thousand_sep"}
+{"intent": "append digit to int_part_gd.", "snippet": "int_part_gd += digit"}
+{"intent": "invert the ordering of elements of int_part_gd, substitute it for int_part.", "snippet": "int_part = int_part_gd [ : : - 1 ]"}
+{"intent": "sum sign, int_part and dec_part, return the result.", "snippet": "return sign + int_part + dec_part"}
+{"intent": "from __future__ import unicode_literals into default name space.", "snippet": "from __future__ import unicode_literals"}
+{"intent": "from django.utils import six into default name space.", "snippet": "from django . utils import six"}
+{"intent": "from django.utils.six.moves import zip into default name space.", "snippet": "from django . utils . six . moves import zip"}
+{"intent": "ESCAPE_MAPPINGS is an dictionary with 10 initial entries: None for 'A', None for 'b', None for 'B', '0' for 'd', 'x' for 'D',", "snippet": "ESCAPE_MAPPINGS = \\{  'A' : None ,  'b' : None ,  'B' : None ,  'd' : '0' ,  'D' : 'x' ,  's' : ' ' ,  'S' : 'x' ,  'w' : 'x' ,  'W' : '!' ,  'Z' : None ,  \\}"}
+{"intent": "' ' for 's', 'x' for 'S', 'x' for 'W', '!' for 'W' and None for 'Z'.   derive the class Choice from list base class.", "snippet": "class Choice ( list ) :"}
+{"intent": "derive the class Group from list base class.", "snippet": "class Group ( list ) :"}
+{"intent": "derive the class NonCapture from list base class.", "snippet": "class NonCapture ( list ) :"}
+{"intent": "define the function normalize with an argument pattern.", "snippet": "def normalize ( pattern ) :"}
+{"intent": "result is an empty list.", "snippet": "result = [ ]"}
+{"intent": "non_capturing_groups is an empty list.", "snippet": "non_capturing_groups = [ ]"}
+{"intent": "consume_next is boolean True.", "snippet": "consume_next = True"}
+{"intent": "call the function next_char with an argument iterator pattern, substitute the result for pattern_iter.", "snippet": "pattern_iter = next_char ( iter ( pattern ) )"}
+{"intent": "num_args is an integer 0.", "snippet": "num_args = 0"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch and escaped, respectively.", "snippet": "ch , escaped = next ( pattern_iter )"}
+{"intent": "if StopIteration exception,", "snippet": "except StopIteration :"}
+{"intent": "return a list with an element tuple with 2 elements: an empty string and an empty list.", "snippet": "return [ ( '' , [ ] ) ]"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "endless loop,", "snippet": "while True :"}
+{"intent": "if escaped is true,", "snippet": "if escaped :"}
+{"intent": "append ch to result.", "snippet": "result . append ( ch )"}
+{"intent": "otherwise if ch equals a string '.',", "snippet": "elif ch == '.' :"}
+{"intent": "append string '.' to result.", "snippet": "result . append ( '.' )"}
+{"intent": "otherwise if ch equals a string '|',", "snippet": "elif ch == '|' :"}
+{"intent": "raise an NotImplementedError exception with an argument string 'Awaiting Implementation'.", "snippet": "raise NotImplementedError ( 'Awaiting Implementation' )"}
+{"intent": "otherwise if ch equals a string '^',", "snippet": "elif ch == '^' :"}
+{"intent": "do nothing.", "snippet": "pass"}
+{"intent": "otherwise if ch equals a string '$',", "snippet": "elif ch == '$' :"}
+{"intent": "skip this loop iteration.", "snippet": "break"}
+{"intent": "otherwise if ch equals a string ')',", "snippet": "elif ch == ')' :"}
+{"intent": "remove first element from non_capturing_groups, substitute it for start.", "snippet": "start = non_capturing_groups . pop ( )"}
+{"intent": "inner is an instance of NonCapture, created with elements of result from start index to the end.", "snippet": "inner = NonCapture ( result [ start : ] )"}
+{"intent": "append list with element inner to list containing first start elements of result, substitute it for result.", "snippet": "result = result [ : start ] + [ inner ]"}
+{"intent": "otherwise if ch equals a string '[',", "snippet": "elif ch == '[' :"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch and escaped, respectively.", "snippet": "ch , escaped = next ( pattern_iter )"}
+{"intent": "append ch to result.", "snippet": "result . append ( ch )"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch and escaped, respectively.", "snippet": "ch , escaped = next ( pattern_iter )"}
+{"intent": "while escaped is true or ch is not equal to a string ']',", "snippet": "while escaped or ch != ']' :"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch and escaped, respectively.", "snippet": "ch , escaped = next ( pattern_iter )"}
+{"intent": "otherwise if ch equals a string '(',", "snippet": "elif ch == '(' :"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch and escaped, respectively.", "snippet": "ch , escaped = next ( pattern_iter )"}
+{"intent": "if ch is not equal to a sring '?' or escaped is true,", "snippet": "if ch != '?' or escaped :"}
+{"intent": "name is a string '_%d' formated with num_args.", "snippet": "name = '_%d' % num_args"}
+{"intent": "increment num_args by one.", "snippet": "num_args += 1"}
+{"intent": "instantiate a class Group with 2 arguments: string '%%(%s)s' formated with name, and name, append it to result.", "snippet": "result . append ( Group ( ( ( '%%(%s)s' % name ) , name ) ) )"}
+{"intent": "call the function walk_to_end with 2 arguments: ch and pattern_iter.", "snippet": "walk_to_end ( ch , pattern_iter )"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch and escaped, respectively.", "snippet": "ch , escaped = next ( pattern_iter )"}
+{"intent": "if ch is contained in string 'iLmsu#',", "snippet": "if ch in 'iLmsu#' :"}
+{"intent": "call the function walk_to_end with 2 arguments: ch and pattern_iter.", "snippet": "walk_to_end ( ch , pattern_iter )"}
+{"intent": "otherwise if ch equals a string ':',", "snippet": "elif ch == ':' :"}
+{"intent": "append length of result to non_capturing_groups.", "snippet": "non_capturing_groups . append ( len ( result ) )"}
+{"intent": "otherwise if ch equals a string 'P',", "snippet": "elif ch != 'P' :"}
+{"intent": "raise an ValueError with an argument string 'Non-reversible reg-exp portion: '(?%s'' formated with ch.", "snippet": "raise ValueError ( 'Non-reversible reg-exp portion: '(?%s'' % ch )"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch and escaped, respectively.", "snippet": "ch , escaped = next ( pattern_iter )"}
+{"intent": "if ch is not equal to string '<' or string '=',", "snippet": "if ch not in ( '<' , '=' ) :"}
+{"intent": "raise an ValueError with an argument string 'Non-reversible reg-exp portion: '(?P%s'' formated with ch.", "snippet": "raise ValueError ( 'Non-reversible reg-exp portion: '(?P%s'' % ch )"}
+{"intent": "if ch equals a string '<',", "snippet": "if ch == '<' :"}
+{"intent": "terminal_char is an string '>'.", "snippet": "terminal_char = '>'"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "terminal_char is an string ')'.", "snippet": "terminal_char = ')'"}
+{"intent": "name is an empty list.", "snippet": "name = [ ]"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch and escaped, respectively.", "snippet": "ch , escaped = next ( pattern_iter )"}
+{"intent": "while ch is not equal to terminal_char,", "snippet": "while ch != terminal_char :"}
+{"intent": "append ch to result.", "snippet": "name . append ( ch )"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch and escaped, respectively.", "snippet": "ch , escaped = next ( pattern_iter )"}
+{"intent": "join elements of name into a string, substitute it for param.", "snippet": "param = '' . join ( name )"}
+{"intent": "if terminal_char is not equal to string ')',", "snippet": "if terminal_char != ')' :"}
+{"intent": "instantiate a class Group with 2 arguments: string '%%(%s)s' formated with param, and param, append it to result.", "snippet": "result . append ( Group ( ( ( '%%(%s)s' % param ) , param ) ) )"}
+{"intent": "call the function walk_to_end with 2 arguments: ch and pattern_iter.", "snippet": "walk_to_end ( ch , pattern_iter )"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "instantiate a class Group with 2 arguments: string '%%(%s)s' formated with param, and None, append it to result.", "snippet": "result . append ( Group ( ( ( '%%(%s)s' % param ) , None ) ) )"}
+{"intent": "otherwise if ch is contained in string '*?+\\{',", "snippet": "elif ch in '*?+\\{' :"}
+{"intent": "call the function get_quantifier with 2 arguments: ch and pattern_iter, substitute the result for count and ch, respectively.", "snippet": "count , ch = get_quantifier ( ch , pattern_iter )"}
+{"intent": "if ch is true,", "snippet": "if ch :"}
+{"intent": "consume_next is boolean False.", "snippet": "consume_next = False"}
+{"intent": "if count is equal to integer 0.", "snippet": "if count == 0 :"}
+{"intent": "if call to the function contains with 2 arguments: last element of result and Group, evaluates to true,", "snippet": "if contains ( result [ - 1 ] , Group ) :"}
+{"intent": "last element of result is an instance of Choice class, created with an argument list with 2 elements: None and last element of result.", "snippet": "result [ - 1 ] = Choice ( [ None , result [ - 1 ] ] )"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "remove the first element from result.", "snippet": "result . pop ( )"}
+{"intent": "otherwise if count is greater than integer 1,", "snippet": "elif count > 1 :"}
+{"intent": "create a list with count decremented by 1 number of last element of result elements, extend list result with it.", "snippet": "result . extend ( [ result [ - 1 ] ] * ( count - 1 ) )"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "append ch to result.", "snippet": "result . append ( ch )"}
+{"intent": "if consume_next is true,", "snippet": "if consume_next :"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch and escaped, respectively.", "snippet": "ch , escaped = next ( pattern_iter )"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "consume_next is boolean True.", "snippet": "consume_next = True"}
+{"intent": "if StopIteration exception,", "snippet": "except StopIteration :"}
+{"intent": "do nothing.", "snippet": "pass"}
+{"intent": "if NotImplementedError exception,", "snippet": "except NotImplementedError :"}
+{"intent": "return a list with an element tuple with 2 elements: an empty string and an empty list.", "snippet": "return [ ( '' , [ ] ) ]"}
+{"intent": "call the function flatten_result with an argument result, unpack the resulting list and zip it in the list of tuples, return the result.", "snippet": "return list ( zip ( * flatten_result ( result ) ) )"}
+{"intent": "define the function next_char with an argument input_iter.", "snippet": "def next_char ( input_iter ) :"}
+{"intent": "for every ch in input_iter,", "snippet": "for ch in input_iter :"}
+{"intent": "if ch is not equal to string '\\\\'.", "snippet": "if ch != '\\\\' :"}
+{"intent": "yield ch and boolean False.", "snippet": "yield ch , False"}
+{"intent": "skip this loop iteration.", "snippet": "continue"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch.", "snippet": "ch = next ( input_iter )"}
+{"intent": "get the value under ch key of the ESCAPE_MAPPINGS dictionary, if it exists substitute it for representative, if not substitute ch for representative.", "snippet": "representative = ESCAPE_MAPPINGS . get ( ch , ch )"}
+{"intent": "if representative is None,", "snippet": "if representative is None :"}
+{"intent": "skip this loop iteration.", "snippet": "continue"}
+{"intent": "yield representative and boolean True.", "snippet": "yield representative , True"}
+{"intent": "define the function walk_to_end with 2 arguments ch and input_iter.", "snippet": "def walk_to_end ( ch , input_iter ) :"}
+{"intent": "if ch equal a string '(',", "snippet": "if ch == '(' :"}
+{"intent": "nesting is integer 1.", "snippet": "nesting = 1"}
+{"intent": "if not,", "snippet": "else :"}
+{"intent": "nesting is integer 0.", "snippet": "nesting = 0"}
+{"intent": "for every ch and escaped in input_iter,", "snippet": "for ch , escaped in input_iter :"}
+{"intent": "if escaped is true,", "snippet": "if escaped :"}
+{"intent": "skip this loop iteration.", "snippet": "continue"}
+{"intent": "otherwise if ch equals a string '(',", "snippet": "elif ch == '(' :"}
+{"intent": "increment nesting by one.", "snippet": "nesting += 1"}
+{"intent": "otherwise if ch equals a string ')',", "snippet": "elif ch == ')' :"}
+{"intent": "if nesting is false,", "snippet": "if not nesting :"}
+{"intent": "return nothing.", "snippet": "return"}
+{"intent": "decrement nesting by one.", "snippet": "nesting -= 1"}
+{"intent": "define the function get_quantifier with 2 arguments ch and input_iter.", "snippet": "def get_quantifier ( ch , input_iter ) :"}
+{"intent": "if ch is contained in string '*?+',", "snippet": "if ch in '*?+' :"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch2 and escaped, respectively.", "snippet": "ch2 , escaped = next ( input_iter )"}
+{"intent": "if StopIteration exception,", "snippet": "except StopIteration :"}
+{"intent": "ch2 is None.", "snippet": "ch2 = None"}
+{"intent": "if ch2 equals string '?',", "snippet": "if ch2 == '?' :"}
+{"intent": "ch2 is None.", "snippet": "ch2 = None"}
+{"intent": "if ch equals string '+',", "snippet": "if ch == '+' :"}
+{"intent": "return integer 1 and ch2.", "snippet": "return 1 , ch2"}
+{"intent": "return integer 0 and ch2.", "snippet": "return 0 , ch2"}
+{"intent": "quant is an empty list.", "snippet": "quant = [ ]"}
+{"intent": "while ch is not equal to a string '\\}',", "snippet": "while ch != '\\}' :"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch and escaped, respectively.", "snippet": "ch , escaped = next ( input_iter )"}
+{"intent": "append ch to quant.", "snippet": "quant . append ( ch )"}
+{"intent": "remove last element for quant.", "snippet": "quant = quant [ : - 1 ]"}
+{"intent": "join elements of quant into a string, split it by string ',', substitute the result for values.", "snippet": "values = '' . join ( quant ) . split ( ',' )"}
+{"intent": "try,", "snippet": "try :"}
+{"intent": "get the next element of the iterable pattern_iter, assign the result for ch and escaped, respectively.", "snippet": "ch , escaped = next ( input_iter )"}
+{"intent": "if StopIteration exception,", "snippet": "except StopIteration :"}
+{"intent": "ch is None.", "snippet": "ch = None"}
+{"intent": "if ch equals a string '?',", "snippet": "if ch == '?' :"}
+{"intent": "ch is None.", "snippet": "ch = None"}
+{"intent": "convert first element of values into a integer, return the result and ch.", "snippet": "return int ( values [ 0 ] ) , ch"}
+{"intent": "define the function contains with 2 arguments source and inst.", "snippet": "def contains ( source , inst ) :"}
+{"intent": "if source is an instance of inst class,", "snippet": "if isinstance ( source , inst ) :"}
+{"intent": "return boolean True.", "snippet": "return True"}
+{"intent": "if source is an instance of NonCapture class,", "snippet": "if isinstance ( source , NonCapture ) :"}
+{"intent": "for every elt in source,", "snippet": "for elt in source :"}
+{"intent": "call the function contains with 2 arguments: elt and inst, if it evaluates to true,", "snippet": "if contains ( elt , inst ) :"}
+{"intent": "return boolean True.", "snippet": "return True"}
+{"intent": "return boolean False.", "snippet": "return False"}
+{"intent": "define the function flatten_result with an argument source.", "snippet": "def flatten_result ( source ) :"}
+{"intent": "if source is None,", "snippet": "if source is None :"}
+{"intent": "return a list containing an empty string and a list containing an empty list.", "snippet": "return [ '' ] , [ [ ] ]"}
+{"intent": "if source is an instance of Group class,", "snippet": "if isinstance ( source , Group ) :"}
+{"intent": "if second element of source is None,", "snippet": "if source [ 1 ] is None :"}
